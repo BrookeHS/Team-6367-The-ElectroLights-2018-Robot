@@ -7,6 +7,10 @@
 
 package org.usfirst.frc.team6367.robot;
 
+import org.usfirst.frc.team6367.robot.io.DriverInput;
+import org.usfirst.frc.team6367.robot.io.RobotOutput;
+import org.usfirst.frc.team6367.robot.teleop.TeleopControl;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +23,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends IterativeRobot {
+	
+	private RobotOutput robotOut;
+	private DriverInput driverIn;
+	private TeleopControl teleopControl;
+	
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
@@ -33,8 +42,19 @@ public class Robot extends IterativeRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		this.robotOut = RobotOutput.getInstance();
+		this.driverIn = DriverInput.getInstance();
+		this.teleopControl = TeleopControl.getInstance();
 	}
 
+	public void disabledInit() {
+		this.robotOut.stopAll();
+	}
+	
+	public void disabledPeriod() {
+		
+	}
+	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -70,11 +90,17 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
+	@Override
+	public void teleopInit() {
+		
+	}
+	
 	/**
 	 * This function is called periodically during operator control.
 	 */
 	@Override
 	public void teleopPeriodic() {
+		robotOut.arcadeDrive(driverIn.getDriverStick());
 	}
 
 	/**
