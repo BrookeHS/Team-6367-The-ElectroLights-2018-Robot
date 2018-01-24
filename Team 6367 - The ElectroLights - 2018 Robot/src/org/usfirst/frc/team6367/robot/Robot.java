@@ -19,6 +19,7 @@ public class Robot extends IterativeRobot {
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 
+	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void robotInit() {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
@@ -29,16 +30,19 @@ public class Robot extends IterativeRobot {
 		this.teleopControl = TeleopControl.getInstance();
 	}
 
+	// Initialization of code for the Disabled portion of the match.
 	@Override
 	public void disabledInit() {
 		this.robotOut.stopAll();
 	}
 
+	// Code that runs when your robot is disabled.
 	@Override
 	public void disabledPeriodic() {
 		
 	}
 	
+	// Initialization of code for autonomous.
 	@Override
 	public void autonomousInit() {
 		m_autoSelected = m_chooser.getSelected();
@@ -47,6 +51,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("Auto selected: " + m_autoSelected);
 	}
 
+	// Code that runs when your robot is in autonomous.
 	@Override
 	public void autonomousPeriodic() {
 		switch (m_autoSelected) {
