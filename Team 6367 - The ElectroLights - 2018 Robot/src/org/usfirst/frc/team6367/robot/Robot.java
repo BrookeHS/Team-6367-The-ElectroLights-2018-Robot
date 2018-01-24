@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopPeriodic() {
-		robotOut.arcadeDrive(driverIn.getDriverStick());
+		robotOut.mecanumDrive(driverIn.getDriverStick());
 	}
 
 	@Override

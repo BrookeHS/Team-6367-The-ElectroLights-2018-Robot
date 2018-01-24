@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class RobotOutput {
 
@@ -19,6 +20,7 @@ public class RobotOutput {
 	private VictorSP climber;
 	
 	protected DifferentialDrive light_drive;
+	protected MecanumDrive light_drive2;
 	
 	
 	/*
@@ -42,6 +44,7 @@ public class RobotOutput {
 		SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
 		SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
 		this.light_drive = new DifferentialDrive(drive_left, drive_right);
+		this.light_drive2 = new MecanumDrive(driveLeftFront ,driveLeftRear ,driveRightFront ,driveRightRear );
 	}
 	
 	public static RobotOutput getInstance() {
@@ -89,4 +92,9 @@ public class RobotOutput {
 	public void tankDrive(Joystick driveStick1, Joystick driveStick2) {
 		light_drive.tankDrive(driveStick1.getY(),driveStick2.getY(),true);
 	}
+	
+	public void mecanumDrive(Joystick driveStick) {
+		light_drive2.driveCartesian(driveStick.getY(), driveStick.getX(), driveStick.getZ());
+	}
+	
 }
