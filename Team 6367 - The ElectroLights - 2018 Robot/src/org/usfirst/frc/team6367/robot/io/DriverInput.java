@@ -25,4 +25,8 @@ public class DriverInput {
 		return driverStick;
 	}
 	
+	public Joystick getMechanismStick() {
+		return mechanismStick;
+	}
+	
 }
