@@ -1,8 +1,14 @@
 package org.usfirst.frc.team6367.robot.LightDrive;
 
-public class LightDrive {
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+
+public class LightDrive implements PIDOutput{
 
 	private static LightDrive instance;
+	
+	PIDController turnController;
+	double rotateToAngleRate;
 	
 	private LightDrive() {
 		
@@ -17,11 +23,9 @@ public class LightDrive {
 	
 	public void driveStraight() {
 		
-		
 	}
 	
 	public void rotateToAngle(double targetAngle) {
-		
 		
 	}
 	
@@ -31,5 +35,10 @@ public class LightDrive {
 	
 	public void ninetyYaw() {
 		
+	}
+	
+	@Override
+	public void pidWrite(double output) {
+		rotateToAngleRate = output;
 	}
 }

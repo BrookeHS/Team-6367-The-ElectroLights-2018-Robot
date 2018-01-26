@@ -25,11 +25,12 @@ public class RobotOutput {
 	
 	/*
 	 * Constructor Method for RobotOutput
-	 * Scope: Private
+	 * Private
 	 * Instantiates each motor controller with PWM channels 0-7.
 	 * 	Drive-train VictorSPs are 0-3
 	 * 	Mechanism VictorSPs are 4-7
 	 * Instantiates Differential Drive for skid-steer control.
+	 * Instantiates Mecanum drive.
 	 */
 	private RobotOutput() {
 		this.driveLeftFront 	= new VictorSP(0);
