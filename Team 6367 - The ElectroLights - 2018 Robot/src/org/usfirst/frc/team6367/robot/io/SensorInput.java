@@ -9,14 +9,17 @@ public class SensorInput {
 
 	private static SensorInput instance;
 	
-	AHRS ahrs;
+	public AHRS ahrs;
+	public Limelight camera;
 	
+	// Constructor for SensorInput, creates an AHRS for the NavX-MXP.
 	private SensorInput() {
 		try {
 			ahrs = new AHRS(SPI.Port.kMXP);
 		} catch(RuntimeException e) {
 			DriverStation.reportError("Error instantiating navX MXP: "+e.getMessage(), true);
 		}
+		camera = new Limelight();
 	}
 	
 	public static SensorInput getInstance() {
