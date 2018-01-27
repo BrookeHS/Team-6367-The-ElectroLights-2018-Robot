@@ -20,7 +20,7 @@ public class LightDrive implements PIDOutput{
 	PIDController turnController;
 	double rotateToAngleRate;
 	SensorInput sensors;
-	RobotOutput robotOut;
+	public RobotOutput robotOut;
 	
 	// Constructor 
 	private LightDrive() {
@@ -46,6 +46,9 @@ public class LightDrive implements PIDOutput{
 			turnController.setSetpoint(kTargetAngleDegrees);
 			rotateToAngleRate = 0;
 			turnController.enable();
+		}
+		else {
+			turnController.disable();
 		}
 		robotOut.setDriveLeft(rotateToAngleRate);
 		robotOut.setDriveRight(rotateToAngleRate);
