@@ -29,6 +29,7 @@ public class TeleopControl {
 			lightDrive.driveStraight();
 		}
 		else {
+			lightDrive.turnController.disable();
 			lightDrive.robotOut.arcadeDrive(a);
 		}
 	}

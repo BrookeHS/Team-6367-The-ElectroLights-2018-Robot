@@ -17,7 +17,7 @@ public class LightDrive implements PIDOutput{
 	static final double kToleranceDegrees = 2.0f;
 	static final double kTargetAngleDegrees = 90.0f;
 	
-	PIDController turnController;
+	public PIDController turnController;
 	double rotateToAngleRate;
 	SensorInput sensors;
 	public RobotOutput robotOut;
@@ -47,11 +47,8 @@ public class LightDrive implements PIDOutput{
 			rotateToAngleRate = 0;
 			turnController.enable();
 		}
-		else {
-			turnController.disable();
-		}
-		robotOut.setDriveLeft(rotateToAngleRate);
-		robotOut.setDriveRight(rotateToAngleRate);
+		robotOut.setDriveLeft(0.8*rotateToAngleRate);
+		robotOut.setDriveRight(0.8*rotateToAngleRate);
 	}
 	
 	public void rotateToAngle(double targetAngle) {
