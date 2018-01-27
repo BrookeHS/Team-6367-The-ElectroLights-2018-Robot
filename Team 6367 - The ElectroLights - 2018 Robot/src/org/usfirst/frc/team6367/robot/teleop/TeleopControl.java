@@ -38,7 +38,14 @@ public class TeleopControl {
     	}else{
       		lightDrive.robotOut.setEndEffector(0);
         }
+       if(a.getZ()>0){
+    	   lightDrive.robotOut.mecanumDrive(a);
+       }
+       else if(a.getZ()<=0) {
+       }
+          lightDrive.robotOut.arcadeDrive(a);
+       }
 	}
 	
 	
-}
+
