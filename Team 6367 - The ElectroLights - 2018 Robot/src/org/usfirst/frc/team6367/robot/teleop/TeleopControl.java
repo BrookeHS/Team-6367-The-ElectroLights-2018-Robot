@@ -2,7 +2,6 @@ package org.usfirst.frc.team6367.robot.teleop;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
-
 import edu.wpi.first.wpilibj.Joystick;
 
 public class TeleopControl {
