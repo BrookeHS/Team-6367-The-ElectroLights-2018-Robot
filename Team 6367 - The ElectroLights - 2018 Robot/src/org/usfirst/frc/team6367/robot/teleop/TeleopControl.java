@@ -31,6 +31,13 @@ public class TeleopControl {
 			lightDrive.turnController.disable();
 			lightDrive.robotOut.arcadeDrive(a);
 		}
+       	if(a.getTrigger()){
+    		lightDrive.robotOut.setEndEffector(.5);
+       	} else if(a.getRawButton(2)){
+            lightDrive.robotOut.setEndEffector(-.5);
+    	}else{
+      		lightDrive.robotOut.setEndEffector(0);
+        }
 	}
 	
 	
