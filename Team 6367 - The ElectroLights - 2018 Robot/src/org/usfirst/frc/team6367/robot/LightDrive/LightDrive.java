@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.PIDOutput;
 
 public class LightDrive implements PIDOutput{
 
-	private static LightDrive instance;
+	public static LightDrive instance;
 	
 	static final double kP = 0.03;
 	static final double kI = 0.00;

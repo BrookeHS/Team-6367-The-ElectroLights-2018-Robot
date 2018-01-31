@@ -29,7 +29,7 @@ public class TeleopControl {
 		}
 		else {
 			lightDrive.turnController.disable();
-			lightDrive.robotOut.arcadeDrive(a);
+			lightDrive.robotOut.mecanumDrive(a);
 		}
        	if(a.getTrigger()){
     		lightDrive.robotOut.setEndEffector(.5);
@@ -38,14 +38,7 @@ public class TeleopControl {
     	}else{
       		lightDrive.robotOut.setEndEffector(0);
         }
-       if(a.getZ()>0){
-    	   lightDrive.robotOut.mecanumDrive(a);
-       }
-       else if(a.getZ()<=0) {
-       }
-          lightDrive.robotOut.arcadeDrive(a);
-       }
 	}
 	
 	
-
+}
