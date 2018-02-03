@@ -1,6 +1,6 @@
 package org.usfirst.frc.team6367.robot.auto;
 
-public class AutoControl {
+public class AutoControl implements Runnable {
 	
 	private static AutoControl instance;
 	
@@ -14,7 +14,7 @@ public class AutoControl {
 		}
 		return instance;
 	}
-	
+	public void run() {}
 }
 /*
  What we need to do:

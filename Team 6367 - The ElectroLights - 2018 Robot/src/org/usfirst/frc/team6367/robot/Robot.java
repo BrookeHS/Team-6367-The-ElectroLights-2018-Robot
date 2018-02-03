@@ -1,5 +1,7 @@
 package org.usfirst.frc.team6367.robot;
 
+import org.usfirst.frc.team6367.robot.auto.AutoControl;
+import org.usfirst.frc.team6367.robot.auto.PickerMode;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.teleop.TeleopControl;
@@ -14,16 +16,17 @@ public class Robot extends IterativeRobot {
 	private DriverInput driverIn;
 	private TeleopControl teleopControl;
 	
-	private static final String kDefaultAuto = "Default";
-	private static final String kCustomAuto = "My Auto";
+	private static final String kDriveStraight = "Drive Straight";
+	private static final String kPicker = "Picker";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	Runnable autoMode;
 
 	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void robotInit() {
-		m_chooser.addDefault("Default Auto", kDefaultAuto);
-		m_chooser.addObject("My Auto", kCustomAuto);
+		m_chooser.addDefault(kDriveStraight, kDriveStraight);
+		m_chooser.addObject(kPicker, kPicker);
 		SmartDashboard.putData("Auto choices", m_chooser);
 		this.robotOut = RobotOutput.getInstance();
 		this.driverIn = DriverInput.getInstance();
@@ -49,20 +52,20 @@ public class Robot extends IterativeRobot {
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
 		System.out.println("Auto selected: " + m_autoSelected);
+	switch (m_autoSelected) {
+		case kPicker:
+			autoMode = new PickerMode(); 
+			break;
+		case kDriveStraight:
+//			autoMode = new DriveStraight();
+			break;
+	}
 	}
 
 	// Code that runs when your robot is in autonomous.
 	@Override
 	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
-			case kCustomAuto:
-				// Put custom auto code here
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
-		}
+	autoMode.run();
 	}
 
 	@Override
