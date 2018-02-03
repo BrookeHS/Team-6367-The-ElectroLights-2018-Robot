@@ -56,6 +56,15 @@ public class LightDrive implements PIDOutput{
 		robotOut.setDriveLeft(0);
 		robotOut.setDriveRight(0);
 	}
+	
+	public void driveDistance(double dist) {
+		if(dist == 180) {
+			stop();
+		} else {
+			driveStraight();
+		}
+		
+	}
 
 	
 	public void rotateToAngle(double targetAngle) {
