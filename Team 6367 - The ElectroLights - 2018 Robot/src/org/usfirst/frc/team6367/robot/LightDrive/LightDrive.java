@@ -50,6 +50,13 @@ public class LightDrive implements PIDOutput{
 		robotOut.setDriveLeft(0.8*rotateToAngleRate);
 		robotOut.setDriveRight(0.8*rotateToAngleRate);
 	}
+	  
+	public void stop() {
+		turnController.disable();
+		robotOut.setDriveLeft(0);
+		robotOut.setDriveRight(0);
+	}
+
 	
 	public void rotateToAngle(double targetAngle) {
 		if(!turnController.isEnabled()) {
