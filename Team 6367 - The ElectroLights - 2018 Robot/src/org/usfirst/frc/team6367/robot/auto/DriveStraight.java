@@ -14,23 +14,15 @@ Drive Straight( Kelvin and Janeya)
 
 public class DriveStraight implements Runnable {
 	LightDrive lightdrive1;
-	Encoder enc;
-	
-
-
-	public void driveStraight() {
+	Encoder encode;
+	double startingPos;
+// constructor
+	public DriveStraight(){
 		lightdrive1 = LightDrive.getInstance();
-		lightdrive1.driveStraight();
+		encode = lightdrive1.enc;// the encoder
+		startingPos = encode.get();
 	}
-	
-	public void stop() {
-		lightdrive1.stop();
-	}
-	
-
 	public void run() {
-		enc = new Encoder(0,1,false,Encoder.EncodingType.k4X);
-		double distance = enc.getDistance();
-		lightdrive1.driveDistance(distance);
+		lightdrive1.driveDistance(encode.get() - startingPos, 15);
 	}
 }
