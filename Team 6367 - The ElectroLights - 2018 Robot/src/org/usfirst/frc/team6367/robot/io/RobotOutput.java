@@ -3,6 +3,8 @@ package org.usfirst.frc.team6367.robot.io;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -14,14 +16,14 @@ public class RobotOutput {
 
 	private static RobotOutput instance;
 	
-	private TalonSRX driveLeftFront;
-	private TalonSRX driveLeftRear;
-	private TalonSRX driveRightFront;
-	private TalonSRX driveRightRear;
-	private VictorSPX elevator;
-	private VictorSPX endEffectorLeft;
-	private VictorSPX endEffectorRight;
-	private VictorSPX climber;
+	private WPI_TalonSRX driveLeftFront;
+	private WPI_VictorSPX driveLeftRear;
+	private WPI_TalonSRX driveRightFront;
+	private WPI_VictorSPX driveRightRear;
+	private WPI_TalonSRX elevator;
+	private WPI_VictorSPX endEffectorLeft;
+	private WPI_VictorSPX endEffectorRight;
+	private WPI_TalonSRX climber;
 	/*
 	 * There needs to be 4 talon srxs
 	 * there need to be victor spx
@@ -44,20 +46,20 @@ public class RobotOutput {
 	 * Instantiates Mecanum drive.
 	 */
 	private RobotOutput() {
-		this.driveLeftFront 	= new TalonSRX(4);
-		this.driveLeftRear		= new TalonSRX(3);
-		this.driveRightFront	= new TalonSRX(2);
-		this.driveRightRear		= new TalonSRX(1);
-		this.elevator			= new VictorSPX(6);
-		this.endEffectorLeft	= new VictorSPX(5);
-		this.endEffectorRight	= new VictorSPX(8);
-		this.climber			= new VictorSPX(7);
+		this.driveLeftFront 	= new WPI_TalonSRX(3);
+		this.driveLeftRear		= new WPI_VictorSPX(6);
+		this.driveRightFront	= new WPI_TalonSRX(2);
+		this.driveRightRear		= new WPI_VictorSPX(7);
+		this.elevator			= new WPI_TalonSRX(4);
+		this.endEffectorLeft	= new WPI_VictorSPX(1);
+		this.endEffectorRight	= new WPI_VictorSPX(5);
+		this.climber			= new WPI_TalonSRX(8);
 		
 		
-	    //SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
-		//SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
-		//this.light_drive = new DifferentialDrive(drive_left, drive_right);
-		//this.light_drive2 = new MecanumDrive(driveLeftFront ,driveLeftRear ,driveRightFront ,driveRightRear );
+	    SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
+		SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
+		this.light_drive = new DifferentialDrive(drive_left, drive_right);
+		this.light_drive2 = new MecanumDrive(driveLeftFront ,driveLeftRear ,driveRightFront ,driveRightRear );
 	}
 	
 	public static RobotOutput getInstance() {
