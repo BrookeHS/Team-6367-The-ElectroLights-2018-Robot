@@ -1,5 +1,9 @@
 package org.usfirst.frc.team6367.robot.io;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -10,14 +14,21 @@ public class RobotOutput {
 
 	private static RobotOutput instance;
 	
-	private VictorSP driveLeftFront;
-	private VictorSP driveLeftRear;
-	private VictorSP driveRightFront;
-	private VictorSP driveRightRear;
-	private VictorSP elevator;
-	private VictorSP endEffectorLeft;
-	private VictorSP endEffectorRight;
-	private VictorSP climber;
+	private TalonSRX driveLeftFront;
+	private TalonSRX driveLeftRear;
+	private TalonSRX driveRightFront;
+	private TalonSRX driveRightRear;
+	private VictorSPX elevator;
+	private VictorSPX endEffectorLeft;
+	private VictorSPX endEffectorRight;
+	private VictorSPX climber;
+	/*
+	 * There needs to be 4 talon srxs
+	 * there need to be victor spx
+	 * 
+	 * 
+	 */
+	
 	
 	protected DifferentialDrive light_drive;
 	protected MecanumDrive light_drive2;
@@ -33,19 +44,20 @@ public class RobotOutput {
 	 * Instantiates Mecanum drive.
 	 */
 	private RobotOutput() {
-		this.driveLeftFront 	= new VictorSP(0);
-		this.driveLeftRear		= new VictorSP(1);
-		this.driveRightFront	= new VictorSP(2);
-		this.driveRightRear		= new VictorSP(3);
-		this.elevator			= new VictorSP(4);
-		this.endEffectorLeft	= new VictorSP(5);
-		this.endEffectorRight	= new VictorSP(6);
-		this.climber			= new VictorSP(7);
+		this.driveLeftFront 	= new TalonSRX(4);
+		this.driveLeftRear		= new TalonSRX(3);
+		this.driveRightFront	= new TalonSRX(2);
+		this.driveRightRear		= new TalonSRX(1);
+		this.elevator			= new VictorSPX(6);
+		this.endEffectorLeft	= new VictorSPX(5);
+		this.endEffectorRight	= new VictorSPX(8);
+		this.climber			= new VictorSPX(7);
 		
-		SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
-		SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
-		this.light_drive = new DifferentialDrive(drive_left, drive_right);
-		this.light_drive2 = new MecanumDrive(driveLeftFront ,driveLeftRear ,driveRightFront ,driveRightRear );
+		
+	    //SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
+		//SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
+		//this.light_drive = new DifferentialDrive(drive_left, drive_right);
+		//this.light_drive2 = new MecanumDrive(driveLeftFront ,driveLeftRear ,driveRightFront ,driveRightRear );
 	}
 	
 	public static RobotOutput getInstance() {
@@ -56,26 +68,26 @@ public class RobotOutput {
 	}
 	
 	public void setDriveLeft(double output) {
-		this.driveLeftFront.set(-output);
-		this.driveLeftRear.set(-output);
+		this.driveLeftFront.set(ControlMode.PercentOutput,-output);
+		this.driveLeftRear.set(ControlMode.PercentOutput,-output);
 	}
 	
 	public void setDriveRight(double output) {
-		this.driveRightFront.set(output);
-		this.driveRightRear.set(output);
+		this.driveRightFront.set(ControlMode.PercentOutput,output);
+		this.driveRightRear.set(ControlMode.PercentOutput,output);
 	}
 	
 	public void setElevator(double output) {
-		this.elevator.set(output);
+		this.elevator.set(ControlMode.PercentOutput,output);
 	}
 	
 	public void setEndEffector(double output) {
-		this.endEffectorLeft.set(output);
-		this.endEffectorRight.set(-output);
+		this.endEffectorLeft.set(ControlMode.PercentOutput, output);
+		this.endEffectorRight.set(ControlMode.PercentOutput,-output);
 	}
 	
 	public void setClimber(double output) {
-		this.climber.set(0);
+		this.climber.set(ControlMode.PercentOutput,0);
 	}
 	
 	public void stopAll() {
