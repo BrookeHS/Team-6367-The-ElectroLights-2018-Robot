@@ -17,9 +17,13 @@ public class RobotOutput {
 	private static RobotOutput instance;
 	
 	private WPI_TalonSRX driveLeftFront;
+	// Follows driveLeftFront
 	private WPI_VictorSPX driveLeftRear;
+	
 	private WPI_TalonSRX driveRightFront;
+	// Follows driveRightFront
 	private WPI_VictorSPX driveRightRear;
+	
 	private WPI_TalonSRX elevator;
 	private WPI_VictorSPX endEffectorLeft;
 	private WPI_VictorSPX endEffectorRight;
@@ -43,7 +47,6 @@ public class RobotOutput {
 	 * 	Drive-train VictorSPs are 0-3
 	 * 	Mechanism VictorSPs are 4-7
 	 * Instantiates Differential Drive for skid-steer control.
-	 * Instantiates Mecanum drive.
 	 */
 	private RobotOutput() {
 		this.driveLeftFront 	= new WPI_TalonSRX(3);
@@ -59,7 +62,6 @@ public class RobotOutput {
 	    SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
 		SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
 		this.light_drive = new DifferentialDrive(drive_left, drive_right);
-		this.light_drive2 = new MecanumDrive(driveLeftFront ,driveLeftRear ,driveRightFront ,driveRightRear );
 	}
 	
 	public static RobotOutput getInstance() {
@@ -106,10 +108,5 @@ public class RobotOutput {
 	
 	public void tankDrive(Joystick driveStick1, Joystick driveStick2) {
 		light_drive.tankDrive(driveStick1.getY(),driveStick2.getY(),true);
-	}
-	
-	public void mecanumDrive(Joystick driveStick) {
-		light_drive2.driveCartesian(driveStick.getY(), driveStick.getX(), driveStick.getZ());
-	}
-	
+	}	
 }

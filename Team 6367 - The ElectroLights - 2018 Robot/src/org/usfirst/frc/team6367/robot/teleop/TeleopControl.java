@@ -29,7 +29,7 @@ public class TeleopControl {
 		}
 		else {
 			lightDrive.turnController.disable();
-			lightDrive.robotOut.mecanumDrive(a);
+			lightDrive.robotOut.arcadeDrive(a);
 		}
        	if(a.getTrigger()){
     		lightDrive.robotOut.setEndEffector(.5);
