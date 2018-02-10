@@ -9,10 +9,14 @@ public class TeleopControl {
 	private static TeleopControl instance;
 	DriverInput humanDriver;
 	LightDrive lightDrive;
+	Elevator elevator;
+	Endeffector endEffector;
 	
 	private TeleopControl() {
 		humanDriver = DriverInput.getInstance();
 		lightDrive = LightDrive.getInstance();
+		elevator = Elevator.getInstance();
+		endEffector = Endeffector.getInstance();
 	}
 	
 	public static TeleopControl getInstance() {
@@ -31,12 +35,30 @@ public class TeleopControl {
 			lightDrive.robotOut.arcadeDrive(a);
 		}
        	if(a.getTrigger()){
-    		lightDrive.robotOut.setEndEffector(.5);
+    		endEffector.deployBox();
        	} else if(a.getRawButton(2)){
-            lightDrive.robotOut.setEndEffector(-.5);
+            endEffector.Intake();
     	}else{
-      		lightDrive.robotOut.setEndEffector(0);
+      		endEffector.Stop();
         }
+       	if(a.getRawButton(6)) {
+       		elevator.goToScale();
+       	}
+       	else {
+       		
+       	}
+       	if(a.getRawButton(4)) {
+       		elevator.goToSwitch();
+       	}
+       	else {
+       	
+       	}
+       	if(a.getRawButton(3)) {
+       		elevator.goToGround();
+       	}
+       	else {
+       		
+       	}
 	}
 	
 	
