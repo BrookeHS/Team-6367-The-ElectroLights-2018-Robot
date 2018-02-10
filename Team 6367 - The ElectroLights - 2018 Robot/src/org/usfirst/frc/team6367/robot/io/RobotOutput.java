@@ -1,11 +1,13 @@
 package org.usfirst.frc.team6367.robot.io;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -63,6 +65,8 @@ public class RobotOutput {
 	    SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
 		SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
 		this.light_drive = new DifferentialDrive(drive_left, drive_right);
+		elevator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0); 
+		elevator.changeControlMode(TalonControlMode.Position);
 	}
 	
 	public static RobotOutput getInstance() {
@@ -83,7 +87,7 @@ public class RobotOutput {
 	}
 	
 	public void setElevator(double output) {
-		this.elevator.set(ControlMode.PercentOutput,output);
+		this.elevator.set(ControlMode.Position,output);
 	}
 	
 	public void setEndEffector(double output) {
@@ -114,4 +118,5 @@ public class RobotOutput {
 	public double compDeadBand(double input) {
 		return Math.copySign((Math.abs(input) - DEADBAND)/(1 - DEADBAND), input);
 	}
+	
 }
