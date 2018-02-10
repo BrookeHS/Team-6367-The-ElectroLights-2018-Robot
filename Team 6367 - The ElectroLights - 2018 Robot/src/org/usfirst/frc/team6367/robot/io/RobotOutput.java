@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6367.robot.io;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -58,12 +59,19 @@ public class RobotOutput {
 		this.endEffectorLeft	= new WPI_VictorSPX(7);
 		this.endEffectorRight	= new WPI_VictorSPX(4);
 		this.climber			= new WPI_TalonSRX(4);
-		
+		driveLeftFront.setInverted(true);
+		driveLeftRear.setInverted(true);
+		driveRightFront.setInverted(true);
+		driveRightRear.setInverted(true);
+		driveRightRear.setNeutralMode(NeutralMode.Brake);
+		driveRightFront.setNeutralMode(NeutralMode.Brake);
+		driveLeftFront.setNeutralMode(NeutralMode.Brake);
+		driveLeftRear.setNeutralMode(NeutralMode.Brake);
 		driveLeftRear.follow(driveLeftFront);
 		driveRightRear.follow(driveRightFront);
 	//    SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
 		//SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
-		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);
+		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);		
 	}
 	
 	public static RobotOutput getInstance() {
