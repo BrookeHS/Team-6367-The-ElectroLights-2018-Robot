@@ -26,9 +26,7 @@ public class Elevator {
 	// make it rise about 6.1 feet
 		RobotOut.setElevator(kscale);
 	}
-<<<<<<< HEAD
 	
-
 	public static Elevator getInstance() {
 		if(instance==null) {
 			instance = new Elevator();
@@ -36,7 +34,4 @@ public class Elevator {
 		return instance;
 	}
 
-
-=======
->>>>>>> 088e6f831a9a1a768f9464fb8db6e115965fc5a1
 }

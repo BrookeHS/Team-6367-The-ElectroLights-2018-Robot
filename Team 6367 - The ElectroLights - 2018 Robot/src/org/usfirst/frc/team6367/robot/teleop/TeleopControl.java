@@ -37,9 +37,9 @@ public class TeleopControl {
        	if(a.getTrigger()){
     		endEffector.deployBox();
        	} else if(a.getRawButton(2)){
-            endEffector.Intake();
+            endEffector.intake();
     	}else{
-      		endEffector.Stop();
+      		endEffector.stop();
         }
        	if(a.getRawButton(6)) {
        		elevator.goToScale();
