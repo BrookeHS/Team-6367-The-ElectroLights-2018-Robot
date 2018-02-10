@@ -113,6 +113,9 @@ public class RobotOutput {
 	}	
 	
 	public double compDeadBand(double input) {
+		if(Math.abs(input)<DEADBAND) {
+			return 0;
+		}
 		return Math.copySign((Math.abs(input) - DEADBAND)/(1 - DEADBAND), input);
 	}
 }
