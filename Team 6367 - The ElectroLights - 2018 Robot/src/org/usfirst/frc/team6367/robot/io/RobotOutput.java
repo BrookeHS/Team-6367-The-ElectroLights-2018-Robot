@@ -50,19 +50,20 @@ public class RobotOutput {
 	 * Instantiates Differential Drive for skid-steer control.
 	 */
 	private RobotOutput() {
-		this.driveLeftFront 	= new WPI_TalonSRX(6);
+		this.driveLeftFront 	= new WPI_TalonSRX(8);
 		this.driveLeftRear		= new WPI_VictorSPX(1);
 		this.driveRightFront	= new WPI_TalonSRX(3);
 		this.driveRightRear		= new WPI_VictorSPX(2);
 		this.elevator			= new WPI_TalonSRX(5);
 		this.endEffectorLeft	= new WPI_VictorSPX(7);
 		this.endEffectorRight	= new WPI_VictorSPX(4);
-		this.climber			= new WPI_TalonSRX(8);
+		this.climber			= new WPI_TalonSRX(4);
 		
-		
-	    SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
-		SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
-		this.light_drive = new DifferentialDrive(drive_left, drive_right);
+		driveLeftRear.follow(driveLeftFront);
+		driveRightRear.follow(driveRightFront);
+	//    SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront, driveLeftRear);
+		//SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
+		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);
 	}
 	
 	public static RobotOutput getInstance() {
@@ -74,7 +75,7 @@ public class RobotOutput {
 	
 	public void setDriveLeft(double output) {
 		this.driveLeftFront.set(ControlMode.PercentOutput,-output);
-		this.driveLeftRear.set(ControlMode.PercentOutput,-output);
+		//this.driveLeftRear.set(ControlMode.PercentOutput,-output);
 	}
 	
 	public void setDriveRight(double output) {
