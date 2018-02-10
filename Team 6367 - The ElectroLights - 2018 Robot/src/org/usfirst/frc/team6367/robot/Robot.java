@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6367.robot;
 
 import org.usfirst.frc.team6367.robot.auto.AutoControl;
-import org.usfirst.frc.team6367.robot.auto.PickerMode;
+//import org.usfirst.frc.team6367.robot.auto.PickerMode;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.teleop.TeleopControl;
@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("Auto selected: " + m_autoSelected);
 	switch (m_autoSelected) {
 		case kPicker:
-			autoMode = new PickerMode(); 
+//		autoMode = new PickerMode(); 
 			break;
 		case kDriveStraight:
 //			autoMode = new DriveStraight();
