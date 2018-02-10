@@ -8,4 +8,16 @@ public class Elevator {
 		RobotOut = RobotOutput.getInstance();
 	}
 	
+	public void goToSwitch() {
+		
+	}
+	
+	public void goToGround() {
+		
+	}
+	
+	public void goToScale() {
+		
+	}
+	
 }

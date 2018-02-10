@@ -95,7 +95,6 @@ public class RobotOutput {
 	
 	public void setDriveRight(double output) {
 		this.driveRightFront.set(ControlMode.PercentOutput,output);
-		//this.driveRightRear.set(ControlMode.PercentOutput,output);
 	}
 	
 	public void setElevator(double output) {
