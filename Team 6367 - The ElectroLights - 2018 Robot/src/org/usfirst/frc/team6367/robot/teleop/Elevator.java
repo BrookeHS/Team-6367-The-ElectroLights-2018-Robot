@@ -9,17 +9,24 @@ public class Elevator {
 		RobotOut = RobotOutput.getInstance();
 	}
 	
+	public final static double  kswitch = 1.25;
+	public final static double  kscale  = 6.1;
+	public final static double kground = 0;
+	
 	public void goToSwitch() {
-		
+	// make it rise 1.25 feet
+		RobotOut.setElevator(kswitch);
 	}
 	
 	public void goToGround() {
-		
+		RobotOut.setElevator(kground);
 	}
 	
-	public void goToScale() {
-		
+	public void goToScale() {	
+	// make it rise about 6.1 feet
+		RobotOut.setElevator(kscale);
 	}
+<<<<<<< HEAD
 	
 
 	public static Elevator getInstance() {
@@ -30,4 +37,6 @@ public class Elevator {
 	}
 
 
+=======
+>>>>>>> 088e6f831a9a1a768f9464fb8db6e115965fc5a1
 }
