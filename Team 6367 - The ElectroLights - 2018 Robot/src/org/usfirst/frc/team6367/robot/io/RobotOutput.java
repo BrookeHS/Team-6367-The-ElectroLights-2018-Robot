@@ -50,7 +50,7 @@ public class RobotOutput {
 	 * Instantiates Differential Drive for skid-steer control.
 	 */
 	private RobotOutput() {
-		this.driveLeftFront 	= new WPI_TalonSRX(8);
+		this.driveLeftFront 	= new WPI_TalonSRX(6);
 		this.driveLeftRear		= new WPI_VictorSPX(1);
 		this.driveRightFront	= new WPI_TalonSRX(3);
 		this.driveRightRear		= new WPI_VictorSPX(2);
@@ -80,7 +80,7 @@ public class RobotOutput {
 	
 	public void setDriveRight(double output) {
 		this.driveRightFront.set(ControlMode.PercentOutput,output);
-		this.driveRightRear.set(ControlMode.PercentOutput,output);
+		//this.driveRightRear.set(ControlMode.PercentOutput,output);
 	}
 	
 	public void setElevator(double output) {
