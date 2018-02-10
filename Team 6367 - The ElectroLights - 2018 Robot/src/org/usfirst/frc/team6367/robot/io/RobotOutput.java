@@ -38,6 +38,7 @@ public class RobotOutput {
 	
 	protected DifferentialDrive light_drive;
 	protected MecanumDrive light_drive2;
+	public static final double DEADBAND = .3;
 	
 	
 	/*
@@ -103,10 +104,14 @@ public class RobotOutput {
 	}
 	
 	public void arcadeDrive(Joystick driveStick) {
-		light_drive.arcadeDrive(driveStick.getY(), driveStick.getX(), true);
+		light_drive.arcadeDrive(compDeadBand(driveStick.getY()), compDeadBand(driveStick.getX()), true);
 	}
 	
 	public void tankDrive(Joystick driveStick1, Joystick driveStick2) {
 		light_drive.tankDrive(driveStick1.getY(),driveStick2.getY(),true);
 	}	
+	
+	public double compDeadBand(double input) {
+		return Math.copySign((Math.abs(input) - DEADBAND)/(1 - DEADBAND), input);
+	}
 }
