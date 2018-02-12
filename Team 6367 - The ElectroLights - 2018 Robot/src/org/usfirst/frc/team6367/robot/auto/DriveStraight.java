@@ -1,8 +1,6 @@
 package org.usfirst.frc.team6367.robot.auto;
 
-import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
-
-import edu.wpi.first.wpilibj.Encoder;
+import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
 /*
 Drive Straight( Kelvin and Janeya)
@@ -13,16 +11,15 @@ Drive Straight( Kelvin and Janeya)
  */
 
 public class DriveStraight implements Runnable {
-	LightDrive lightdrive1;
-	Encoder encode;
+	RobotOutput robotOut;
 	double startingPos;
 // constructor
+	  
 	public DriveStraight(){
-		lightdrive1 = LightDrive.getInstance();
-		encode = lightdrive1.enc;// the encoder
-		startingPos = encode.get();
+		robotOut = RobotOutput.getInstance();
+		robotOut.resetDriveEncoders();
 	}
 	public void run() {
-		lightdrive1.driveDistance(encode.get() - startingPos, 15);
+		robotOut.driveDistance(15);
 	}
 }

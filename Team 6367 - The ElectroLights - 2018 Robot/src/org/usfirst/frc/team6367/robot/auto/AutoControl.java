@@ -1,11 +1,22 @@
 package org.usfirst.frc.team6367.robot.auto;
 
+import org.usfirst.frc.team6367.robot.io.RobotOutput;
+import org.usfirst.frc.team6367.robot.teleop.Elevator;
+import org.usfirst.frc.team6367.robot.teleop.Endeffector;
+
 public class AutoControl implements Runnable {
-	
+	static boolean StartLeft = true;
+	static boolean SwitchLeft = true;
 	private static AutoControl instance;
+
+	RobotOutput RobotOut;
+	Elevator Elevate;
+	Endeffector Endeffect;
 	
 	private AutoControl() {
-		
+		RobotOut = RobotOutput.getInstance();
+		Elevate = Elevator.getInstance();
+		Endeffect = Endeffector.getInstance();
 	}
 	
 	public static AutoControl getInstance() {
@@ -14,7 +25,13 @@ public class AutoControl implements Runnable {
 		}
 		return instance;
 	}
-	public void run() {}
+	public void run() {
+		if(StartLeft == SwitchLeft) {
+			RobotOut.driveDistance(15);
+			Elevate.goToSwitch();
+			Endeffect.deployBox();
+		}
+	}
 }
 /*
  What we need to do:
