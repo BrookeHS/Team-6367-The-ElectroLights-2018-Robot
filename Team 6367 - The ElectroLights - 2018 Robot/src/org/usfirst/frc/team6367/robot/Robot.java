@@ -3,6 +3,7 @@ package org.usfirst.frc.team6367.robot;
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
 import org.usfirst.frc.team6367.robot.auto.DriveStraight;
 import org.usfirst.frc.team6367.robot.auto.PickerMode;
+import org.usfirst.frc.team6367.robot.auto.SimpleDeposit;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.io.SensorInput;
@@ -24,6 +25,7 @@ public class Robot extends MagicRobot {
 	
 	private static final String kDriveStraight = "Drive Straight";
 	private static final String kPicker = "Picker";
+	private static final String kSimpleDeposit = "Simple Deposit";
 	
 
 	// Initialization of the robot at the beginning of the match.
@@ -32,6 +34,7 @@ public class Robot extends MagicRobot {
 		
 		addAutonomous(kDriveStraight, new DriveStraight());
 		addAutonomous(kPicker, new PickerMode());
+		addAutonomous(kSimpleDeposit, new SimpleDeposit());
 		
 		this.driverIn = new DriverInput();
 		this.elevator = new Elevator();
