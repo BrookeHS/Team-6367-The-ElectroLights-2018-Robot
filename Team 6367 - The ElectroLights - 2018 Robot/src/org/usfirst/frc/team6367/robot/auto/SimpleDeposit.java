@@ -2,6 +2,7 @@ package org.usfirst.frc.team6367.robot.auto;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
+import org.usfirst.frc.team6367.robot.io.SensorInput;
 import org.usfirst.frc.team6367.robot.teleop.Elevator;
 import org.usfirst.frc.team6367.robot.teleop.Endeffector;
 
@@ -25,7 +26,14 @@ public class SimpleDeposit extends AutonomousStateMachine {
 	Elevator elevator;
 	@MagicInject
 	Endeffector endeffector;
+	@MagicInject
+	SensorInput sensors;
 
+	public void onEnabled() {
+		robotOut.resetDriveEncoders();
+		sensors.ahrs.reset();
+	}
+	
 	@State
 	public void driving() {
 		robotOut.driveDistance(DIST);
@@ -61,4 +69,10 @@ public class SimpleDeposit extends AutonomousStateMachine {
 		endeffector.deployBox();
 	}
 
+	@Override
+	public void done() {
+		super.done();
+		endeffector.stop();
+	}
+	
 }
