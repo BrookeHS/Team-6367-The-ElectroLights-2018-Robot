@@ -43,6 +43,9 @@ public class RobotOutput {
 	public static final double kENCODERPERFOOT = (6 * Math.PI) / 1024;
 	public static final int CLOSEENOUGH = (int) Math.round(.5/kENCODERPERFOOT);
 	public static final int CONFIGCLOSEENOUGH = CLOSEENOUGH/2;
+	public static final double ELEVATORPERFOOT =  ((6 * Math.PI) / 1024);
+	public static final int ELEVATORTOLERANCE = (int)Math.round(.2/ELEVATORPERFOOT);
+	public static final int CONFIGELEVATORTOLERANCE = ELEVATORTOLERANCE/2 ;
 	
 	/*
 	 * Constructor Method for RobotOutput
@@ -120,13 +123,17 @@ public class RobotOutput {
   public boolean atPosition(){
   	return Math.abs(driveLeftFront.getClosedLoopError(0)) <= CLOSEENOUGH && Math.abs(driveRightFront.getClosedLoopError(0)) <= CLOSEENOUGH;
   }
+  public boolean atScale(){
+	  return  Math.abs(elevator.getClosedLoopError(0))<= ELEVATORTOLERANCE && Math.abs(elevator.getClosedLoopError(0))<= ELEVATORTOLERANCE;
+	  }
+  
   
 	public void setDriveRight(double output) {
 		this.driveRightFront.set(ControlMode.PercentOutput,output);
 	}
 	
-	public void setElevator(double output) {
-		this.elevator.set(ControlMode.Position,output);
+	public void setElevator(double position) {
+		this.elevator.set(ControlMode.Position,position/ELEVATORPERFOOT);
 	}
 	
 	public void setEndEffector(double output) {
