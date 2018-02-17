@@ -16,15 +16,15 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class RobotOutput {
-	
-	private WPI_TalonSRX driveLeftFront;
+
+  private WPI_TalonSRX driveLeftFront;
 	// Follows driveLeftFront
 	private WPI_VictorSPX driveLeftRear;
 	
 	private WPI_TalonSRX driveRightFront;
 	// Follows driveRightFront
 	private WPI_VictorSPX driveRightRear;
-	
+;
 	private WPI_TalonSRX elevator;
 	private WPI_VictorSPX endEffectorLeft;
 	private WPI_VictorSPX endEffectorRight;
@@ -41,6 +41,8 @@ public class RobotOutput {
 	protected MecanumDrive light_drive2;
 	public static final double DEADBAND = .3;
 	public static final double kENCODERPERFOOT = (6 * Math.PI) / 1024;
+	public static final int CLOSEENOUGH = (int) Math.round(.5/kENCODERPERFOOT);
+	public static final int CONFIGCLOSEENOUGH = CLOSEENOUGH/2;
 	
 	/*
 	 * Constructor Method for RobotOutput
@@ -88,7 +90,7 @@ public class RobotOutput {
 		driveRightFront.config_kI(0, 0, 0);
 		driveRightFront.config_kD(0, 0, 0);
 		driveRightFront.config_kF(0, 0, 0);
-		driveRightFront.configAllowableClosedloopError(0, (int) Math.round(.5/kENCODERPERFOOT), 0);
+		driveRightFront.configAllowableClosedloopError(0, CONFIGCLOSEENOUGH, 0);
 		driveRightFront.configClosedloopRamp(0.5, 0);
 		
 		driveLeftFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -96,7 +98,7 @@ public class RobotOutput {
 		driveLeftFront.config_kI(0, 0, 0);
 		driveLeftFront.config_kD(0, 0, 0);
 		driveLeftFront.config_kF(0, 0, 0);
-		driveLeftFront.configAllowableClosedloopError(0, (int) Math.round(.5/kENCODERPERFOOT), 0);
+		driveLeftFront.configAllowableClosedloopError(0, CONFIGCLOSEENOUGH, 0);
 		driveLeftFront.configClosedloopRamp(0.5, 0);
 	}
 	
@@ -112,9 +114,13 @@ public class RobotOutput {
 	
 	public void setDriveLeft(double output) {
 		this.driveLeftFront.set(ControlMode.PercentOutput,-output);
-		//this.driveLeftRear.set(ControlMode.PercentOutput,-output);
+		this.driveLeftRear.set(ControlMode.PercentOutput,-output);
 	}
-	
+
+  public boolean toPosition(){
+  	return Math.abs(driveLeftFront.getClosedLoopError(0)) <= CLOSEENOUGH && Math.abs(driveRightFront.getClosedLoopError(0)) <= CLOSEENOUGH;
+  }
+  
 	public void setDriveRight(double output) {
 		this.driveRightFront.set(ControlMode.PercentOutput,output);
 	}
@@ -140,6 +146,8 @@ public class RobotOutput {
 		this.setClimber(0);
 	}
 	
+  
+  
 	public void arcadeDrive(Joystick driveStick) {
 		light_drive.arcadeDrive(compDeadBand(driveStick.getY()), compDeadBand(driveStick.getX()), true);
 	}
