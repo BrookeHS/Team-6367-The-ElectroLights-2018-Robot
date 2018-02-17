@@ -2,29 +2,28 @@ package org.usfirst.frc.team6367.robot.teleop;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
+import org.usfirst.frc.team6367.robot.io.RobotOutput;
+
 import edu.wpi.first.wpilibj.Joystick;
+import io.github.robotpy.magicbot.MagicInject;
 
 public class TeleopControl {
 	
-	private static TeleopControl instance;
+	@MagicInject
+	RobotOutput robotOut;
+	
+	@MagicInject
 	DriverInput humanDriver;
+	
+	@MagicInject
 	LightDrive lightDrive;
+	
+	@MagicInject
 	Elevator elevator;
+	
+	@MagicInject
 	Endeffector endEffector;
 	
-	private TeleopControl() {
-		humanDriver = DriverInput.getInstance();
-		lightDrive = LightDrive.getInstance();
-		elevator = Elevator.getInstance();
-		endEffector = Endeffector.getInstance();
-	}
-	
-	public static TeleopControl getInstance() {
-		if(instance==null) {
-			instance = new TeleopControl();
-		}
-		return instance;
-	}
 	
 	public void teleopTasks() {
 		Joystick a = humanDriver.getDriverStick();
@@ -32,7 +31,7 @@ public class TeleopControl {
 			lightDrive.driveStraight();
 		} else {
 			lightDrive.turnController.disable();
-			lightDrive.robotOut.arcadeDrive(a);
+			robotOut.arcadeDrive(a);
 		}
        	if(a.getTrigger()){
     		endEffector.deployBox();

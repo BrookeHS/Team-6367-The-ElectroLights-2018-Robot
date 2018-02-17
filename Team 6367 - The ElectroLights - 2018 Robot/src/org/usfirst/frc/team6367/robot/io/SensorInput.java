@@ -7,13 +7,11 @@ import edu.wpi.first.wpilibj.SPI;
 
 public class SensorInput {
 
-	private static SensorInput instance;
-	
 	public AHRS ahrs;
 	public Limelight camera;
 	
 	// Constructor for SensorInput, creates an AHRS for the NavX-MXP.
-	private SensorInput() {
+	public SensorInput() {
 		try {
 			ahrs = new AHRS(SPI.Port.kMXP);
 		} catch(RuntimeException e) {
@@ -21,14 +19,4 @@ public class SensorInput {
 		}
 		camera = new Limelight();
 	}
-	
-	public static SensorInput getInstance() {
-		if(instance==null) {
-			instance = new SensorInput();
-		}
-		return instance;
-	}
-	
-	
-	
 }

@@ -1,11 +1,11 @@
 package org.usfirst.frc.team6367.robot.auto;
 
-public class PickerMode implements Runnable {
+import io.github.robotpy.magicbot.MagicAutonomous;
+
+public class PickerMode implements MagicAutonomous {
 
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	public void autonomousPeriodic() {
 	}
 
 }

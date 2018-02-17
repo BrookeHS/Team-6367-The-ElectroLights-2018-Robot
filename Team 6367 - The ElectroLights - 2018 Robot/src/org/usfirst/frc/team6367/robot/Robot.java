@@ -1,36 +1,45 @@
 package org.usfirst.frc.team6367.robot;
 
-import org.usfirst.frc.team6367.robot.auto.AutoControl;
-//import org.usfirst.frc.team6367.robot.auto.PickerMode;
+import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
+import org.usfirst.frc.team6367.robot.auto.DriveStraight;
+import org.usfirst.frc.team6367.robot.auto.PickerMode;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
+import org.usfirst.frc.team6367.robot.io.SensorInput;
+import org.usfirst.frc.team6367.robot.teleop.Elevator;
+import org.usfirst.frc.team6367.robot.teleop.Endeffector;
 import org.usfirst.frc.team6367.robot.teleop.TeleopControl;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import io.github.robotpy.magicbot.MagicRobot;
 
-public class Robot extends IterativeRobot {
+public class Robot extends MagicRobot {
 	
-	private RobotOutput robotOut;
-	private DriverInput driverIn;
-	private TeleopControl teleopControl;
+	public DriverInput driverIn;	
+	public Elevator elevator;
+	public Endeffector endEffector;
+	public LightDrive lightDrive;
+	public RobotOutput robotOut;
+	public SensorInput sensors;
+	public TeleopControl teleopControl;
 	
 	private static final String kDriveStraight = "Drive Straight";
 	private static final String kPicker = "Picker";
-	private String m_autoSelected;
-	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	Runnable autoMode;
+	
 
 	// Initialization of the robot at the beginning of the match.
 	@Override
-	public void robotInit() {
-		m_chooser.addDefault(kDriveStraight, kDriveStraight);
-		m_chooser.addObject(kPicker, kPicker);
-		SmartDashboard.putData("Auto choices", m_chooser);
-		this.robotOut = RobotOutput.getInstance();
-		this.driverIn = DriverInput.getInstance();
-		this.teleopControl = TeleopControl.getInstance();
+	public void createObjects() {
+		
+		addAutonomous(kDriveStraight, new DriveStraight());
+		addAutonomous(kPicker, new PickerMode());
+		
+		this.driverIn = new DriverInput();
+		this.elevator = new Elevator();
+		this.endEffector = new Endeffector();
+		this.lightDrive = new LightDrive();
+		this.robotOut = new RobotOutput();
+		this.sensors = new SensorInput();
+		this.teleopControl = new TeleopControl();
 	}
 
 	// Initialization of code for the Disabled portion of the match.
@@ -45,29 +54,6 @@ public class Robot extends IterativeRobot {
 		
 	}
 	
-	// Initialization of code for autonomous.
-	@Override
-	public void autonomousInit() {
-		m_autoSelected = m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
-		System.out.println("Auto selected: " + m_autoSelected);
-	switch (m_autoSelected) {
-		case kPicker:
-//		autoMode = new PickerMode(); 
-			break;
-		case kDriveStraight:
-//			autoMode = new DriveStraight();
-			break;
-	}
-	}
-
-	// Code that runs when your robot is in autonomous.
-	@Override
-	public void autonomousPeriodic() {
-	autoMode.run();
-	}
-
 	@Override
 	public void teleopInit() {
 		
@@ -76,9 +62,5 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		teleopControl.teleopTasks();
-	}
-
-	@Override
-	public void testPeriodic() {
 	}
 }

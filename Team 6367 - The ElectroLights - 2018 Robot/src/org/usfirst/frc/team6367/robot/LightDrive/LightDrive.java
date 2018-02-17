@@ -6,11 +6,10 @@ import org.usfirst.frc.team6367.robot.io.SensorInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
+import io.github.robotpy.magicbot.MagicInject;
 
 public class LightDrive implements PIDOutput{
 
-	public static LightDrive instance;
-	
 	static final double kP = 0.03;
 	static final double kI = 0.00;
 	static final double kD = 0.00;
@@ -20,27 +19,21 @@ public class LightDrive implements PIDOutput{
 	
 	public PIDController turnController;
 	double rotateToAngleRate;
+	
+	@MagicInject
 	SensorInput sensors;
-	public RobotOutput robotOut;
+	
+	@MagicInject
+	RobotOutput robotOut;
 	
 	// Constructor 
-	private LightDrive() {
-		this.sensors = SensorInput.getInstance();
-		this.robotOut = RobotOutput.getInstance();
+	public LightDrive() {
 		this.turnController = new PIDController(kP, kI, kD, kF, sensors.ahrs, this );
 		this.turnController.setInputRange(-180.0f,  180.0f);
 		this.turnController.setOutputRange(-1.0, 1.0);
 		this.turnController.setAbsoluteTolerance(kToleranceDegrees);
 		this.turnController.setContinuous(true);
 		this.turnController.disable();
-	}
-
-	
-	public static LightDrive getInstance() {
-		if(instance==null) {
-			instance = new LightDrive();
-		}
-		return instance;
 	}
 	
 	public void driveStraight() {
