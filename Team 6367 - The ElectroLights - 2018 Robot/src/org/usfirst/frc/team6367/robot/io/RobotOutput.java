@@ -117,7 +117,7 @@ public class RobotOutput {
 		this.driveLeftRear.set(ControlMode.PercentOutput,-output);
 	}
 
-  public boolean toPosition(){
+  public boolean atPosition(){
   	return Math.abs(driveLeftFront.getClosedLoopError(0)) <= CLOSEENOUGH && Math.abs(driveRightFront.getClosedLoopError(0)) <= CLOSEENOUGH;
   }
   
