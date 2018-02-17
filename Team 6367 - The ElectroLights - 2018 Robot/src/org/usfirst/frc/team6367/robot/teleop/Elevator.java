@@ -2,12 +2,12 @@ package org.usfirst.frc.team6367.robot.teleop;
 
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
+import io.github.robotpy.magicbot.MagicInject;
+
 public class Elevator {
+	
+	@MagicInject
 	RobotOutput RobotOut;
-	private static Elevator instance;
-	public Elevator() {
-		RobotOut = RobotOutput.getInstance();
-	}
 	
 	public final static double  kswitch = 1.25;
 	public final static double  kscale  = 6.1;
@@ -26,12 +26,4 @@ public class Elevator {
 	// make it rise about 6.1 feet
 		RobotOut.setElevator(kscale);
 	}
-	
-	public static Elevator getInstance() {
-		if(instance==null) {
-			instance = new Elevator();
-		}
-		return instance;
-	}
-
 }

@@ -7,18 +7,10 @@ public class DriverInput {
 	private Joystick driverStick;
 	private Joystick mechanismStick;
 	
-	private static DriverInput instance;
 	
-	private DriverInput() {
+	public DriverInput() {
 		driverStick = new Joystick(0);
 		mechanismStick = new Joystick(1);
-	}
-	
-	public static DriverInput getInstance() {
-		if(instance==null) {
-			instance = new DriverInput();
-		}
-		return instance;
 	}
 	
 	public Joystick getDriverStick() {

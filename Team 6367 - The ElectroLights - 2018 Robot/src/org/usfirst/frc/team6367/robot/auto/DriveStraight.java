@@ -2,6 +2,9 @@ package org.usfirst.frc.team6367.robot.auto;
 
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
+import io.github.robotpy.magicbot.MagicAutonomous;
+import io.github.robotpy.magicbot.MagicInject;
+
 /*
 Drive Straight( Kelvin and Janeya)
 	1.Drive Straight
@@ -10,16 +13,21 @@ Drive Straight( Kelvin and Janeya)
    	- Or after distance
  */
 
-public class DriveStraight implements Runnable {
+public class DriveStraight implements MagicAutonomous {
+	
+	@MagicInject
 	RobotOutput robotOut;
+	
 	double startingPos;
-// constructor
-	  
-	public DriveStraight(){
-		robotOut = RobotOutput.getInstance();
+	
+	
+	@Override
+	public void onEnabled() {
 		robotOut.resetDriveEncoders();
 	}
-	public void run() {
+	
+	@Override
+	public void autonomousPeriodic() {
 		robotOut.driveDistance(15);
 	}
 }

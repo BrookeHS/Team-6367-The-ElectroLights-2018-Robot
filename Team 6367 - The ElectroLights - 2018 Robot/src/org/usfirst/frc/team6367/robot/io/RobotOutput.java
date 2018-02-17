@@ -16,8 +16,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class RobotOutput {
-
-	private static RobotOutput instance;
 	
 	private WPI_TalonSRX driveLeftFront;
 	// Follows driveLeftFront
@@ -52,7 +50,7 @@ public class RobotOutput {
 	 * 	Mechanism VictorSPs are 4-7 
 	 * Instantiates Differential Drive for skid-steer control.
 	 */
-	private RobotOutput() {
+	public RobotOutput() {
 		this.driveLeftFront 	= new WPI_TalonSRX(6); //
 		this.driveLeftRear		= new WPI_VictorSPX(1);
 		this.driveRightFront	= new WPI_TalonSRX(3); //
@@ -100,13 +98,6 @@ public class RobotOutput {
 		driveLeftFront.config_kF(0, 0, 0);
 		driveLeftFront.configAllowableClosedloopError(0, (int) Math.round(.5/kENCODERPERFOOT), 0);
 		driveLeftFront.configClosedloopRamp(0.5, 0);
-	}
-	
-	public static RobotOutput getInstance() {
-		if(instance == null) {
-			instance = new RobotOutput();
-		}
-		return instance;
 	}
 	
 	public void resetDriveEncoders() {
