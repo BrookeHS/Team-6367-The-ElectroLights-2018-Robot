@@ -33,10 +33,8 @@ public class LightDrive implements PIDOutput{
 		this.turnController.setAbsoluteTolerance(kToleranceDegrees);
 		this.turnController.setContinuous(true);
 		this.turnController.disable();
-		enc.setDistancePerPulse(6 * Math.PI); // in feet
 	}
 
-	public Encoder enc = new Encoder(0,1,false,Encoder.EncodingType.k4X);
 	
 	public static LightDrive getInstance() {
 		if(instance==null) {
@@ -59,14 +57,6 @@ public class LightDrive implements PIDOutput{
 		turnController.disable();
 		robotOut.setDriveLeft(0);
 		robotOut.setDriveRight(0);
-	}
-	
-	public void driveDistance(double distance, double targetFT) {
-		if(distance >= targetFT) {
-			stop();
-		} else {
-			driveStraight();
-		}
 	}
 
 	

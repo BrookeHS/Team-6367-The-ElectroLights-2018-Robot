@@ -42,7 +42,7 @@ public class RobotOutput {
 	protected DifferentialDrive light_drive;
 	protected MecanumDrive light_drive2;
 	public static final double DEADBAND = .3;
-	
+	public static final double kENCODERPERFOOT = (6 * Math.PI) / 1024;
 	
 	/*
 	 * Constructor Method for RobotOutput
@@ -53,9 +53,9 @@ public class RobotOutput {
 	 * Instantiates Differential Drive for skid-steer control.
 	 */
 	private RobotOutput() {
-		this.driveLeftFront 	= new WPI_TalonSRX(6);
+		this.driveLeftFront 	= new WPI_TalonSRX(6); //
 		this.driveLeftRear		= new WPI_VictorSPX(1);
-		this.driveRightFront	= new WPI_TalonSRX(3);
+		this.driveRightFront	= new WPI_TalonSRX(3); //
 		this.driveRightRear		= new WPI_VictorSPX(2);
 		this.elevator			= new WPI_TalonSRX(5);
 		this.endEffectorLeft	= new WPI_VictorSPX(7);
@@ -77,8 +77,29 @@ public class RobotOutput {
 		//SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront, driveRightRear);
 		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);		
 
-		elevator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0); 
-	//	elevator.changeControlMode(ControlMode.Position);
+		elevator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		elevator.config_kP(0, 0.1, 0);
+		elevator.config_kI(0, 0, 0);
+		elevator.config_kD(0, 0, 0);
+		elevator.config_kF(0, 0, 0);
+		elevator.configAllowableClosedloopError(0, (int) Math.round(.5/kENCODERPERFOOT), 0);
+		elevator.configClosedloopRamp(0.5, 0);
+
+		driveRightFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		driveRightFront.config_kP(0, 0.1, 0);
+		driveRightFront.config_kI(0, 0, 0);
+		driveRightFront.config_kD(0, 0, 0);
+		driveRightFront.config_kF(0, 0, 0);
+		driveRightFront.configAllowableClosedloopError(0, (int) Math.round(.5/kENCODERPERFOOT), 0);
+		driveRightFront.configClosedloopRamp(0.5, 0);
+		
+		driveLeftFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		driveLeftFront.config_kP(0, 0.1, 0);
+		driveLeftFront.config_kI(0, 0, 0);
+		driveLeftFront.config_kD(0, 0, 0);
+		driveLeftFront.config_kF(0, 0, 0);
+		driveLeftFront.configAllowableClosedloopError(0, (int) Math.round(.5/kENCODERPERFOOT), 0);
+		driveLeftFront.configClosedloopRamp(0.5, 0);
 	}
 	
 	public static RobotOutput getInstance() {
@@ -86,6 +107,16 @@ public class RobotOutput {
 			instance = new RobotOutput();
 		}
 		return instance;
+	}
+	
+	public void resetDriveEncoders() {
+		this.driveRightFront.setSelectedSensorPosition(0,0,0);
+		this.driveLeftFront.setSelectedSensorPosition(0,0,0);
+	}
+	
+	public void driveDistance(double position) {
+		this.driveLeftFront.set(ControlMode.Position, position/kENCODERPERFOOT);
+		this.driveRightFront.set(ControlMode.Position, position/kENCODERPERFOOT);
 	}
 	
 	public void setDriveLeft(double output) {
