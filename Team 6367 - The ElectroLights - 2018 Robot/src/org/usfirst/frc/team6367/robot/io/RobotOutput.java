@@ -49,7 +49,7 @@ public class RobotOutput {
 	 * Private
 	 * Instantiates each motor controller with PWM channels 0-7.
 	 * 	Drive-train VictorSPs are 0-3
-	 * 	Mechanism VictorSPs are 4-7
+	 * 	Mechanism VictorSPs are 4-7 
 	 * Instantiates Differential Drive for skid-steer control.
 	 */
 	private RobotOutput() {
