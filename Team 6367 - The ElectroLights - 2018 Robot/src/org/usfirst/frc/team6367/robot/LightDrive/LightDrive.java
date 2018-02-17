@@ -76,7 +76,7 @@ public class LightDrive implements PIDOutput{
 		this.rotateToAngle(270);
 	}
 	
-	public boolean atAngle() 
+	public boolean atAngle() {
 		return turnController.onTarget();
 	}
 	@Override

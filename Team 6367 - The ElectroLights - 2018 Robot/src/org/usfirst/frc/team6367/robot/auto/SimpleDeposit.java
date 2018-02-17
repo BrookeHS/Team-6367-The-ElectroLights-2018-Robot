@@ -2,6 +2,8 @@ package org.usfirst.frc.team6367.robot.auto;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
+import org.usfirst.frc.team6367.robot.teleop.Elevator;
+import org.usfirst.frc.team6367.robot.teleop.Endeffector;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import io.github.robotpy.magicbot.MagicInject;
@@ -19,6 +21,10 @@ public class SimpleDeposit extends AutonomousStateMachine {
 	RobotOutput robotOut;
 	@MagicInject
 	LightDrive lightDrive;
+	@MagicInject
+	Elevator elevator;
+	@MagicInject
+	Endeffector endeffector;
 
 	@State
 	public void driving() {
@@ -52,7 +58,7 @@ public class SimpleDeposit extends AutonomousStateMachine {
 
 	@TimedState(duration = 4)
 	public void endEffector() {
-		robotOut.deployBox();
+		endeffector.deployBox();
 	}
 
 }
