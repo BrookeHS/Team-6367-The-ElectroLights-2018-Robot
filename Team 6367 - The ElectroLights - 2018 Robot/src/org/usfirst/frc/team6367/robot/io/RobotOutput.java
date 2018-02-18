@@ -106,6 +106,13 @@ public class RobotOutput {
 		this.driveRightFront.setSelectedSensorPosition(0,0,0);
 		this.driveLeftFront.setSelectedSensorPosition(0,0,0);
 	}
+  public int getEncoderLeftSide(){
+    return driveLeftFront.getSelectedSensorPosition(0);
+  }
+  
+  public int getEncoderRightSide(){
+    return driveRightFront.getSelectedSensorPosition(0);
+  }
 	
 	public void driveDistance(double position) {
 		this.driveLeftFront.set(ControlMode.Position, position/kENCODERPERFOOT);
