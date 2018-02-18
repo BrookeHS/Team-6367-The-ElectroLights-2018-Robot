@@ -23,12 +23,12 @@ public class PickerMode implements MagicAutonomous {
 		if (gameData.length() > 0) {
 			if (gameData.charAt(1) == 'R') {
 				robotOut.driveDistance(DIST);
-				if(robotOut.toPosition()) {
+				if(robotOut.atPosition()) {
 					light.rotateToAngle(90);
 				}
 			} else if (gameData.charAt(1) == 'L') {
 				robotOut.driveDistance(DIST);
-				if(robotOut.toPosition()) {
+				if(robotOut.atPosition()) {
 					light.rotateToAngle(270);
 				}
 			}
