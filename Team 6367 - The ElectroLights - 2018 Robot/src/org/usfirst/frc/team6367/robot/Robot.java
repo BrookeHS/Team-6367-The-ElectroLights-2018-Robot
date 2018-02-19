@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6367.robot;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
+import org.usfirst.frc.team6367.robot.auto.AutoTrajectory;
 import org.usfirst.frc.team6367.robot.auto.DriveStraight;
 import org.usfirst.frc.team6367.robot.auto.PickerMode;
 import org.usfirst.frc.team6367.robot.auto.SimpleDeposit;
@@ -11,10 +12,19 @@ import org.usfirst.frc.team6367.robot.teleop.Elevator;
 import org.usfirst.frc.team6367.robot.teleop.Endeffector;
 import org.usfirst.frc.team6367.robot.teleop.TeleopControl;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.robotpy.magicbot.MagicRobot;
 
 public class Robot extends MagicRobot {
 	
+	public enum AutonomousChoice {
+		AutoModeLeft,
+		AutoModeRight,
+		AutoModeMiddle,
+	}
+	
+	public SendableChooser<AutonomousChoice> startingPos;
 	public DriverInput driverIn;	
 	public Elevator elevator;
 	public Endeffector endEffector;
@@ -22,6 +32,7 @@ public class Robot extends MagicRobot {
 	public RobotOutput robotOut;
 	public SensorInput sensors;
 	public TeleopControl teleopControl;
+	public org.usfirst.frc.team6367.robot.auto.AutoTrajectory autoTrajectory;
 	
 	private static final String kDriveStraight = "Drive Straight";
 	private static final String kPicker = "Picker";
@@ -43,6 +54,7 @@ public class Robot extends MagicRobot {
 		this.robotOut = new RobotOutput();
 		this.sensors = new SensorInput();
 		this.teleopControl = new TeleopControl();
+		this.autoTrajectory = new AutoTrajectory();
 	}
 
 	// Initialization of code for the Disabled portion of the match.
@@ -61,9 +73,17 @@ public class Robot extends MagicRobot {
 	public void teleopInit() {
 		
 	}
+
 	
 	@Override
 	public void teleopPeriodic() {
 		teleopControl.teleopTasks();
 	}
+
+	 public void CreateChoices(){
+	  	startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
+	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
+	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
+	    SmartDashboard.putData("Trajectory",startingPos);
+	  }
 }

@@ -34,7 +34,7 @@ public class SimpleDeposit extends AutonomousStateMachine {
 		sensors.ahrs.reset();
 	}
 	
-	@State
+	@State(first=true)
 	public void driving() {
 		robotOut.driveDistance(DIST);
 		if (robotOut.atPosition()) {
