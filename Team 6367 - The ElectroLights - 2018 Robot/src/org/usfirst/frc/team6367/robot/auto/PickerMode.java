@@ -13,7 +13,7 @@ import io.github.robotpy.magicbot.sm.AutonomousStateMachine;
 public class PickerMode extends AutonomousStateMachine{
 	
   String gameData = DriverStation.getInstance().getGameSpecificMessage();
-  int choiceNum;
+  AutonomousChoice choiceNum;
   
   
 	@MagicInject
@@ -29,16 +29,8 @@ public class PickerMode extends AutonomousStateMachine{
 	// This method is called once at the beginning of autonomous mode.
 	@Override
 	public void onEnabled() {
-   		String choice = startingPos.getSelected();
-		if(choice == "Left") {
-			choiceNum = 0;
-		} else if(choice.equals("Middle")) {
-			choiceNum = 1;
-		} else {
-			choiceNum = 2;
-		}
-		if(gameData.charAt())
-		autoTrajectory.calculateTrajectory(choiceNum, gameData.charAt(1));
+	    choiceNum = startingPos.getSelected();
+		autoTrajectory.calculateTrajectory(choiceNum, gameData);
     
 	}
 }

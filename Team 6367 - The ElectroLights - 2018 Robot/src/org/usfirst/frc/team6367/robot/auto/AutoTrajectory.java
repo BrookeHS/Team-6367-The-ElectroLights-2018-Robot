@@ -34,7 +34,7 @@ public class AutoTrajectory {
 
   	
   
-  public void calculateTrajectory( AutonomousChoice startingLocation, boolean scaleSide ){
+  public void calculateTrajectory( AutonomousChoice startingLocation, String scaleSide ){
     Trajectory[] toReturn = new Trajectory[2];
 		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.02, AutoTrajectory.kMaxVelocity, 2.0, 60.0);
     
@@ -54,14 +54,14 @@ public class AutoTrajectory {
      *   Move forward, turn left, move forward, and then drop cube.
      */
     Waypoint[] points = null;
-    if( startingLocation==AutonomousChoice.AutoModeLeft&&scaleSide==true ){
+    if( startingLocation==AutonomousChoice.AutoModeLeft&& scaleSide.charAt(1) == 'R'){
       points = new Waypoint[] {
         new Waypoint (0,0,0),
         new Waypoint(27, 0, Pathfinder.d2r(-90)),
         new Waypoint(27, -2.5, Pathfinder.d2r(-90)),
       };
     }
-   else if(startingLocation==AutonomousChoice.AutoModeLeft&&scaleSide==false){
+   else if(startingLocation==AutonomousChoice.AutoModeLeft && scaleSide.charAt(1) == 'L'){
       points = new Waypoint[] {
         new Waypoint (0,0,0),
         new Waypoint(21.5, 0, Pathfinder.d2r(-90)),
@@ -71,7 +71,7 @@ public class AutoTrajectory {
       };
     }
     
-    else if(startingLocation==AutonomousChoice.AutoModeMiddle&&scaleSide==true){
+    else if(startingLocation==AutonomousChoice.AutoModeMiddle&& scaleSide.charAt(1) == 'R'){
       points = new Waypoint[] {
         new Waypoint (0,0,0),
         new Waypoint(6.5, 0, Pathfinder.d2r(90)),
@@ -80,7 +80,7 @@ public class AutoTrajectory {
         new Waypoint(27, 9.5, Pathfinder.d2r(-90)),
       };
     }
-    else if(startingLocation==AutonomousChoice.AutoModeMiddle&&scaleSide==false){
+    else if(startingLocation==AutonomousChoice.AutoModeMiddle&& scaleSide.charAt(1) == 'L'){
       points = new Waypoint[] {
         new Waypoint (0,0,0),
         new Waypoint(6.5, 0, Pathfinder.d2r(-90)),
@@ -90,7 +90,7 @@ public class AutoTrajectory {
       };
       }
     
-    else if(startingLocation==AutonomousChoice.AutoModeRight&&scaleSide==true ){
+    else if(startingLocation==AutonomousChoice.AutoModeRight&& scaleSide.charAt(1) == 'R'){
       points = new Waypoint[] {
         new Waypoint (0,0,0),
         new Waypoint(21.5, 0, Pathfinder.d2r(90)),
@@ -99,7 +99,7 @@ public class AutoTrajectory {
         new Waypoint(27, 17, Pathfinder.d2r(-90)),
       };
     }
-    else if(startingLocation==AutonomousChoice.AutoModeRight&&scaleSide==false ){
+    else if(startingLocation==AutonomousChoice.AutoModeRight&& scaleSide.charAt(1) == 'L'){
       points = new Waypoint[] {
         new Waypoint (0,0,0),
         new Waypoint(27, 0, Pathfinder.d2r(90)),
