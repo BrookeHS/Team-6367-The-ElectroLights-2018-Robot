@@ -9,7 +9,7 @@ public class PathfinderLoader {
 	 */
 	public static void load() {
 		if (System.getProperty("os.name").startsWith("Windows")) {
-			File soFile = new File("lib/libpathfinderjava.dll");
+			File soFile = new File("lib/pathfinderjava.dll");
 			System.load(soFile.getAbsolutePath());
 		} else {
 			File soFile = new File("lib/libpathfinderjava.so");
