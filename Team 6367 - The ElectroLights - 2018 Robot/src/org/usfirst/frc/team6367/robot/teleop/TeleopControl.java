@@ -40,25 +40,16 @@ public class TeleopControl {
     	}else{
       		endEffector.stop();
         }
-       	if(a.getRawButton(6)) {
-       		elevator.goToScale();
+       	if(a.getRawButton(5)) {
+       		elevator.goUp();
+       	} else if(a.getRawButton(8)) {
+       		elevator.goDown();
        	}
        	else {
-       		
-       	}
-       	if(a.getRawButton(4)) {
-       		elevator.goToSwitch();
-       	}
-       	else {
-       	
-       	}
-       	if(a.getRawButton(3)) {
-       		elevator.goToGround();
-       	}
-       	else {
-       		
+       		elevator.stop();
        	}
 	}
-	
-	
 }
+	
+	
+

@@ -13,17 +13,16 @@ public class Elevator {
 	public final static double  kscale  = 6.1;
 	public final static double kground = 0;
 	
-	public void goToSwitch() {
+public void goDown() {
 	// make it rise 1.25 feet
-		RobotOut.setElevator(kswitch);
+		RobotOut.elevator.set(.5);
 	}
 	
-	public void goToGround() {
-		RobotOut.setElevator(kground);
+	public void goUp() {
+		RobotOut.elevator.set(-.5);
 	}
 	
-	public void goToScale() {	
-	// make it rise about 6.1 feet
-		RobotOut.setElevator(kscale);
+	public void stop() {
+		RobotOut.elevator.set(0);
 	}
 }

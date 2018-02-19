@@ -25,7 +25,7 @@ public class RobotOutput {
 	// Follows driveRightFront
 	private WPI_VictorSPX driveRightRear;
 	
-	private WPI_TalonSRX elevator;
+	public WPI_TalonSRX elevator;
 	private WPI_VictorSPX endEffectorLeft;
 	private WPI_VictorSPX endEffectorRight;
 	private WPI_TalonSRX climber;
