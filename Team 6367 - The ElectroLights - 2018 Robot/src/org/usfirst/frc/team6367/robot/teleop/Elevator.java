@@ -7,7 +7,7 @@ import io.github.robotpy.magicbot.MagicInject;
 public class Elevator {
 	
 	@MagicInject
-	RobotOutput RobotOut;
+	RobotOutput robotOut;
 	
 	public final static double  kswitch = 1.25;
 	public final static double  kscale  = 6.1;
@@ -15,14 +15,14 @@ public class Elevator {
 	
 public void goUp() {
 	// make it rise 1.25 feet
-		RobotOut.elevator.set(.5);
+		robotOut.elevator.set(.8);
 	}
 	
 	public void goDown() {
-		RobotOut.elevator.set(-.5);
+		robotOut.elevator.set(-.8);
 	}
 	
 	public void stop() {
-		RobotOut.elevator.set(0);
+		robotOut.elevator.set(0);
 	}
 }

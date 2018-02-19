@@ -161,7 +161,7 @@ public class RobotOutput {
 	}
 	
 	public void arcadeDrive(Joystick driveStick) {
-		light_drive.arcadeDrive(compDeadBand(driveStick.getY()), compDeadBand(driveStick.getX()), true);
+		light_drive.arcadeDrive(-compDeadBand(driveStick.getY()), compDeadBand(driveStick.getX()), true);
 	}
 	
 	public void tankDrive(Joystick driveStick1, Joystick driveStick2) {

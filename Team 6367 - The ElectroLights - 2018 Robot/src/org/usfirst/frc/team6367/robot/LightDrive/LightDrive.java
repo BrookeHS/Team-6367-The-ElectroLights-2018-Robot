@@ -28,12 +28,12 @@ public class LightDrive implements PIDOutput{
 	
 	// Constructor 
 	public LightDrive() {
-		this.turnController = new PIDController(kP, kI, kD, kF, sensors.ahrs, this );
+/*		this.turnController = new PIDController(kP, kI, kD, kF, sensors.ahrs, this );
 		this.turnController.setInputRange(-180.0f,  180.0f);
 		this.turnController.setOutputRange(-1.0, 1.0);
 		this.turnController.setAbsoluteTolerance(kToleranceDegrees);
 		this.turnController.setContinuous(true);
-		this.turnController.disable();
+		this.turnController.disable();*/
 	}
 	
 	public void driveStraight() {

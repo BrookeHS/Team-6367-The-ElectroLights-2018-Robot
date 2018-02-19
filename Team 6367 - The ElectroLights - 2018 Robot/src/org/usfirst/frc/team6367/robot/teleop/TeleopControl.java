@@ -13,10 +13,10 @@ public class TeleopControl {
 	RobotOutput robotOut;
 	
 	@MagicInject
-	DriverInput humanDriver;
+	DriverInput driverIn;
 	
-	@MagicInject
-	LightDrive lightDrive;
+//	@MagicInject
+//	LightDrive lightDrive;
 	
 	@MagicInject
 	Elevator elevator;
@@ -26,13 +26,13 @@ public class TeleopControl {
 	
 	
 	public void teleopTasks() {
-		Joystick a = humanDriver.getDriverStick();
-		if(a.getRawButton(6)) {
+		Joystick a = driverIn.getDriverStick();
+/*		if(a.getRawButton(6)) {
 			lightDrive.driveStraight();
 		} else {
 			lightDrive.turnController.disable();
 			robotOut.arcadeDrive(a);
-		}
+		}*/
        	if(a.getTrigger()){
     		endEffector.deployBox();
        	} else if(a.getRawButton(2)){
@@ -42,12 +42,13 @@ public class TeleopControl {
         }
        	if(a.getRawButton(5)) {
        		elevator.goUp();
-       	} else if(a.getRawButton(8)) {
+       	} else if(a.getRawButton(3)) {
        		elevator.goDown();
        	}
        	else {
        		elevator.stop();
        	}
+       	robotOut.arcadeDrive(a);
 	}
 }
 	
