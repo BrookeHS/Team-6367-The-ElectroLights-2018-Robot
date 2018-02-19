@@ -64,7 +64,7 @@ public class RobotOutput {
 		this.elevator			= new WPI_TalonSRX(5);
 		this.endEffectorLeft	= new WPI_VictorSPX(7);
 		this.endEffectorRight	= new WPI_VictorSPX(4);
-		this.climber			= new WPI_TalonSRX(4);
+		this.climber			= new WPI_TalonSRX(8);
 		
 		driveLeftFront.setInverted(true);
 		driveLeftRear.setInverted(true);

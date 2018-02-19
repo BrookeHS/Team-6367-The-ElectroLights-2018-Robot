@@ -27,7 +27,7 @@ public class TeleopControl {
 	
 	public void teleopTasks() {
 		Joystick a = humanDriver.getDriverStick();
-		if(a.getRawButton(5)) {
+		if(a.getRawButton(6)) {
 			lightDrive.driveStraight();
 		} else {
 			lightDrive.turnController.disable();
