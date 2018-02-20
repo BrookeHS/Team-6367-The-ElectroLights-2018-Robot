@@ -5,7 +5,6 @@ import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import io.github.robotpy.magicbot.MagicInject;
-
 public class Elevator {
 	
 	@MagicInject
@@ -16,13 +15,13 @@ public class Elevator {
 	public final static double kground = 0;
 	
 	public void upPosition() {
-		robotOut.elevator.set(ControlMode.Position, -20.3*(1024));
+		robotOut.elevator.set(ControlMode.Position, 400);
 	}
 	public void downPosition() {
 		robotOut.elevator.set(ControlMode.Position, 0);
 	}
 	public void midPosition() {
-		robotOut.elevator.set(ControlMode.Position, -12*(1024));		
+		robotOut.elevator.set(ControlMode.Position, 200);		
 	}
 	
 	public void goUp() {
@@ -32,7 +31,11 @@ public class Elevator {
 	public void goDown() {
 		robotOut.elevator.set(-.8);
 	}
-	  public boolean upFinished() {
+	
+	public void stop() {
+		robotOut.elevator.set(0);
+	}
+	public boolean upFinished() {
 		return robotOut.elevator.get() == 0;
 	}
 }

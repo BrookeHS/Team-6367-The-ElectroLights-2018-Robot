@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -29,6 +30,9 @@ public class RobotOutput {
 	private WPI_VictorSPX endEffectorLeft;
 	private WPI_VictorSPX endEffectorRight;
 	private WPI_TalonSRX climber;
+	
+	
+	public Servo dropServo;
 	/*
 	 * There needs to be 4 talon srxs
 	 * there need to be victor spx
@@ -57,6 +61,8 @@ public class RobotOutput {
 	 * Instantiates Differential Drive for skid-steer control.
 	 */
 	public RobotOutput() {
+		dropServo.set(0);
+		
 		this.driveLeftFront 	= new WPI_TalonSRX(6); //
 		this.driveLeftRear		= new WPI_VictorSPX(1);
 		this.driveRightFront	= new WPI_TalonSRX(3); //

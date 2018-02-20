@@ -5,6 +5,7 @@ import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Servo;
 import io.github.robotpy.magicbot.MagicInject;
 
 public class TeleopControl {
@@ -23,6 +24,9 @@ public class TeleopControl {
 	
 	@MagicInject
 	EndEffector endEffector;
+	
+	
+	
 	
 	
 	public void teleopTasks() {
@@ -48,7 +52,9 @@ public class TeleopControl {
        	else if(a.getRawButton(4)){
        		elevator.downPosition();
        	}
-       	
+       	if(a.getRawButton(12)) {
+       		robotOut.dropServo.set(90);
+       	}  	
        	robotOut.arcadeDrive(a);
 	}
 }
