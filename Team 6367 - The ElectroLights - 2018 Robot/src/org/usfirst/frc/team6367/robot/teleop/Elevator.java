@@ -15,13 +15,22 @@ public class Elevator {
 	public final static double kground = 0;
 	
 	public void upPosition() {
+<<<<<<< HEAD
 		robotOut.elevator.set(ControlMode.Position, 400);
+=======
+		robotOut.elevator.set(ControlMode.Position, 7*(1024));
+>>>>>>> parent of f769174... Elevator Final Position and PID Values
 	}
 	public void downPosition() {
 		robotOut.elevator.set(ControlMode.Position, 0);
+		robotOut.elevator.setSelectedSensorPosition(0, 0, 0);
 	}
 	public void midPosition() {
+<<<<<<< HEAD
 		robotOut.elevator.set(ControlMode.Position, 200);		
+=======
+		robotOut.elevator.set(ControlMode.Position, 4*(1024));		
+>>>>>>> parent of f769174... Elevator Final Position and PID Values
 	}
 	
 	public void goUp() {

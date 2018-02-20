@@ -55,6 +55,7 @@ public class RobotOutput {
 	 * 4-7 Instantiates Differential Drive for skid-steer control.
 	 */
 	public RobotOutput() {
+<<<<<<< HEAD
 		dropServo.set(0);
 
 		this.driveLeftFront = new WPI_TalonSRX(6); //
@@ -66,6 +67,17 @@ public class RobotOutput {
 		this.endEffectorRight = new WPI_VictorSPX(4);
 		this.climber = new WPI_TalonSRX(5);
 
+=======
+		this.driveLeftFront 	= new WPI_TalonSRX(6); //
+		this.driveLeftRear		= new WPI_VictorSPX(1);
+		this.driveRightFront	= new WPI_TalonSRX(5); //
+		this.driveRightRear		= new WPI_VictorSPX(2);
+		this.elevator			= new WPI_TalonSRX(8);
+		this.endEffectorLeft	= new WPI_VictorSPX(7);
+		this.endEffectorRight	= new WPI_VictorSPX(4);
+		this.climber			= new WPI_TalonSRX(3);
+		
+>>>>>>> parent of f769174... Elevator Final Position and PID Values
 		driveLeftFront.setInverted(true);
 		driveLeftRear.setInverted(true);
 		driveRightFront.setInverted(true);
@@ -84,7 +96,7 @@ public class RobotOutput {
 		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);
 
 		elevator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		elevator.config_kP(0, 0.5, 0);
+		elevator.config_kP(0, 0.8, 0);
 		elevator.config_kI(0, 0, 0);
 		elevator.config_kD(0, 0, 0);
 		elevator.config_kF(0, 0, 0);
