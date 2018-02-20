@@ -31,11 +31,15 @@ public class Elevator {
 	public void goDown() {
 		robotOut.elevator.set(-.8);
 	}
+<<<<<<< HEAD
 	
 	public void stop() {
 		robotOut.elevator.set(0);
 	}
 	public boolean upFinished() {
+=======
+	  public boolean upFinished() {
+>>>>>>> parent of c4e9fa7... Bug Fixes to Elevator
 		return robotOut.elevator.get() == 0;
 	}
 }
