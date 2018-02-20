@@ -16,14 +16,13 @@ public class Elevator {
 	public final static double kground = 0;
 	
 	public void upPosition() {
-		robotOut.elevator.set(ControlMode.Position, 7*(1024));
+		robotOut.elevator.set(ControlMode.Position, -20.3*(1024));
 	}
 	public void downPosition() {
 		robotOut.elevator.set(ControlMode.Position, 0);
-		robotOut.elevator.setSelectedSensorPosition(0, 0, 0);
 	}
 	public void midPosition() {
-		robotOut.elevator.set(ControlMode.Position, 4*(1024));		
+		robotOut.elevator.set(ControlMode.Position, -12*(1024));		
 	}
 	
 	public void goUp() {
