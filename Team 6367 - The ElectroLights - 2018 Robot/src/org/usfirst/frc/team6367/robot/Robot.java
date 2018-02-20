@@ -42,7 +42,12 @@ public class Robot extends MagicRobot {
 	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void createObjects() {
+<<<<<<< HEAD
 		//addAutonomous(kPicker, new PickerMode());
+=======
+		
+		addAutonomous(kPicker, new PickerMode());
+>>>>>>> b8aab2d906f33153f982b08e2c867c54295ccc9a
 		this.driverIn = new DriverInput();
 		this.elevator = new Elevator();
 		this.endEffector = new EndEffector();
