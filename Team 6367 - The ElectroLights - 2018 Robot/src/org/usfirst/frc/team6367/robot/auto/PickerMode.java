@@ -27,7 +27,7 @@ public class PickerMode extends AutonomousStateMachine {
 	@MagicInject
 	Elevator elevator;
 	@MagicInject
-	EndEffector effector;
+	EndEffector endEffector;
 
 	int startingLocation;
 	boolean scaleSide;
@@ -56,9 +56,9 @@ public class PickerMode extends AutonomousStateMachine {
 	}
 	
 	public void deployBox() {
-		effector.deployBox();
-		if(effector.finishedDeploy()) {
-			effector.stop();
+		endEffector.deployBox();
+		if(endEffector.finishedDeploy()) {
+			endEffector.stop();
 		}
 	}
 	

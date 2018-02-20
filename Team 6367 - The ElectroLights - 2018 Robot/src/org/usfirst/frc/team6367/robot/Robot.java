@@ -42,7 +42,12 @@ public class Robot extends MagicRobot {
 	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void createObjects() {
-//		addAutonomous(kPicker, new PickerMode());
+		startingPos = new SendableChooser<AutonomousChoice>();
+		addAutonomous(kPicker, new PickerMode());
+		startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
+	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
+	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
+	    SmartDashboard.putData("Trajectory",startingPos);
 		this.driverIn = new DriverInput();
 		this.elevator = new Elevator();
 		this.endEffector = new EndEffector();
@@ -69,7 +74,6 @@ public class Robot extends MagicRobot {
 	public void teleopInit() {
 		
 	}
-
 	
 	@Override
 	public void teleopPeriodic() {
