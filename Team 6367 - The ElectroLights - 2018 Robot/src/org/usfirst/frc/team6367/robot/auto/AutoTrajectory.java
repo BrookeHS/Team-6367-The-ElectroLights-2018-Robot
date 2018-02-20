@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team6367.robot.auto;
 
+import java.io.File;
+
 import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.io.SensorInput;
@@ -49,38 +51,26 @@ public class AutoTrajectory {
 		 * -> right and Scale -> left. Move forward and drop cube. Location -> right and
 		 * Scale -> right. Move forward, turn left, move forward, and then drop cube.
 		 */
-		Waypoint[] points = null;
+		File myFile;
 		if (startingLocation == AutonomousChoice.AutoModeLeft && scaleSide.charAt(1) == 'R') {
-			points = new Waypoint[] { new Waypoint(0, 0, 0), new Waypoint(27, 0, Pathfinder.d2r(-90)),
-					new Waypoint(27, -2.5, Pathfinder.d2r(-90)), };
+			myFile = new File("robotLScaleR.csv");			
 		} else if (startingLocation == AutonomousChoice.AutoModeLeft && scaleSide.charAt(1) == 'L') {
-			points = new Waypoint[] { new Waypoint(0, 0, 0), new Waypoint(21.5, 0, Pathfinder.d2r(-90)),
-					new Waypoint(21.5, -19, 0), new Waypoint(27, -19, Pathfinder.d2r(90)),
-					new Waypoint(27, -17, Pathfinder.d2r(90)), };
-		}
-
-		else if (startingLocation == AutonomousChoice.AutoModeMiddle && scaleSide.charAt(1) == 'R') {
-			points = new Waypoint[] { new Waypoint(0, 0, 0), new Waypoint(6.5, 0, Pathfinder.d2r(90)),
-					new Waypoint(6.5, 12, 0), new Waypoint(27, 12, Pathfinder.d2r(-90)),
-					new Waypoint(27, 9.5, Pathfinder.d2r(-90)), };
+			myFile = new File("robotLScaleL.csv");
+		} else if (startingLocation == AutonomousChoice.AutoModeMiddle && scaleSide.charAt(1) == 'R') {
+			myFile = new File("robotMScaleR.csv");
 		} else if (startingLocation == AutonomousChoice.AutoModeMiddle && scaleSide.charAt(1) == 'L') {
-			points = new Waypoint[] { new Waypoint(0, 0, 0), new Waypoint(6.5, 0, Pathfinder.d2r(-90)),
-					new Waypoint(6.5, -12, 0), new Waypoint(27, -12, Pathfinder.d2r(90)),
-					new Waypoint(27, -9.5, Pathfinder.d2r(90)), };
-		}
-
-		else if (startingLocation == AutonomousChoice.AutoModeRight && scaleSide.charAt(1) == 'R') {
-			points = new Waypoint[] { new Waypoint(0, 0, 0), new Waypoint(21.5, 0, Pathfinder.d2r(90)),
-					new Waypoint(21.5, 19, 0), new Waypoint(27, 19, Pathfinder.d2r(-90)),
-					new Waypoint(27, 17, Pathfinder.d2r(-90)), };
+			myFile = new File("robotMScaleL.csv");
+		} else if (startingLocation == AutonomousChoice.AutoModeRight && scaleSide.charAt(1) == 'R') {
+			myFile = new File("robotRScaleR.csv");
 		} else if (startingLocation == AutonomousChoice.AutoModeRight && scaleSide.charAt(1) == 'L') {
-			points = new Waypoint[] { new Waypoint(0, 0, 0), new Waypoint(27, 0, Pathfinder.d2r(90)),
-					new Waypoint(27, 2.5, Pathfinder.d2r(90)), };
+			myFile = new File("robotRScaleL.csv");
 		}
 
 		// After you generate the waypoints, define the trajectory.
-		Trajectory trajectory = Pathfinder.generate(points, config);
 
+		myFile = new File("myfile.csv");
+		Trajectory trajectory = Pathfinder.readFromCSV(myFile);
+		
 		// Modifies trajectory based on how wide the wheels are.
 		// Wheelbase Width = 0.5969
 		TankModifier modifier = new TankModifier(trajectory).modify(0.5969);

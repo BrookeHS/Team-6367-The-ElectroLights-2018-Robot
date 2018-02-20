@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import io.github.robotpy.magicbot.MagicAutonomous;
 import io.github.robotpy.magicbot.MagicInject;
 import io.github.robotpy.magicbot.sm.AutonomousStateMachine;
+import io.github.robotpy.magicbot.sm.State;
 
 public class PickerMode extends AutonomousStateMachine {
 
@@ -32,6 +33,16 @@ public class PickerMode extends AutonomousStateMachine {
 		autoTrajectory.calculateTrajectory(choiceNum, gameData);
 
 	}
+	
+	@State(first=true)
+	public void driving() {
+		autoTrajectory.move();
+		if (autoTrajectory.isFinished()) {
+			nextState("do_ext");
+		}
+	}
+	
+	
 }
 
 /*
