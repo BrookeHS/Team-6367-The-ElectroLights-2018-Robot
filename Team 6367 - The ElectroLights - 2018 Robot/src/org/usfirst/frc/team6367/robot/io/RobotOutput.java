@@ -59,12 +59,12 @@ public class RobotOutput {
 	public RobotOutput() {
 		this.driveLeftFront 	= new WPI_TalonSRX(6); //
 		this.driveLeftRear		= new WPI_VictorSPX(1);
-		this.driveRightFront	= new WPI_TalonSRX(3); //
+		this.driveRightFront	= new WPI_TalonSRX(5); //
 		this.driveRightRear		= new WPI_VictorSPX(2);
-		this.elevator			= new WPI_TalonSRX(5);
+		this.elevator			= new WPI_TalonSRX(8);
 		this.endEffectorLeft	= new WPI_VictorSPX(7);
 		this.endEffectorRight	= new WPI_VictorSPX(4);
-		this.climber			= new WPI_TalonSRX(8);
+		this.climber			= new WPI_TalonSRX(3);
 		
 		driveLeftFront.setInverted(true);
 		driveLeftRear.setInverted(true);
@@ -161,12 +161,9 @@ public class RobotOutput {
 	}
 	
 	public void arcadeDrive(Joystick driveStick) {
-		light_drive.arcadeDrive(-compDeadBand(driveStick.getY()), compDeadBand(driveStick.getX()), true);
+		light_drive.arcadeDrive(compDeadBand(driveStick.getY()), -compDeadBand(driveStick.getX()), true);
 	}
 	
-	public void tankDrive(Joystick driveStick1, Joystick driveStick2) {
-		light_drive.tankDrive(driveStick1.getY(),driveStick2.getY(),true);
-	}	
 
 	
 	public double compDeadBand(double input) {

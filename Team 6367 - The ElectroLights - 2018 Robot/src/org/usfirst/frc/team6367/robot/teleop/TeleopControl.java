@@ -45,9 +45,10 @@ public class TeleopControl {
        	} else if(a.getRawButton(3)) {
        		elevator.midPosition();
        	}
-       	if(a.getRawButton(4)){
+       	else if(a.getRawButton(4)){
        		elevator.downPosition();
        	}
+       	
        	robotOut.arcadeDrive(a);
 	}
 }
