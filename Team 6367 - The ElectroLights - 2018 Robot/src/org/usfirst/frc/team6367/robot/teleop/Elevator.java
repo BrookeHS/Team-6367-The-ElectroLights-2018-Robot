@@ -15,40 +15,16 @@ public class Elevator {
 	public final static double kground = 0;
 	
 	public void upPosition() {
-<<<<<<< HEAD
-		robotOut.elevator.set(ControlMode.Position, 400);
-=======
-		robotOut.elevator.set(ControlMode.Position, 7*(1024));
->>>>>>> parent of f769174... Elevator Final Position and PID Values
+		robotOut.elevator.set(ControlMode.Position, -20.0*(1024));
 	}
 	public void downPosition() {
 		robotOut.elevator.set(ControlMode.Position, 0);
-		robotOut.elevator.setSelectedSensorPosition(0, 0, 0);
 	}
 	public void midPosition() {
-<<<<<<< HEAD
-		robotOut.elevator.set(ControlMode.Position, 200);		
-=======
-		robotOut.elevator.set(ControlMode.Position, 4*(1024));		
->>>>>>> parent of f769174... Elevator Final Position and PID Values
+		robotOut.elevator.set(ControlMode.Position, -14*(1024));		
 	}
 	
-	public void goUp() {
-		robotOut.elevator.set(1);
-	}
-	
-	public void goDown() {
-		robotOut.elevator.set(-.8);
-	}
-<<<<<<< HEAD
-	
-	public void stop() {
-		robotOut.elevator.set(0);
-	}
 	public boolean upFinished() {
-=======
-	  public boolean upFinished() {
->>>>>>> parent of c4e9fa7... Bug Fixes to Elevator
 		return robotOut.elevator.get() == 0;
 	}
 }
