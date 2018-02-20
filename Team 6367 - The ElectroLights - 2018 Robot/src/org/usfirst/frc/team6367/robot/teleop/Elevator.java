@@ -13,9 +13,8 @@ public class Elevator {
 	public final static double  kscale  = 6.1;
 	public final static double kground = 0;
 	
-public void goUp() {
-	// make it rise 1.25 feet
-		robotOut.elevator.set(.8);
+	public void goUp() {
+		robotOut.elevator.set(1);
 	}
 	
 	public void goDown() {
