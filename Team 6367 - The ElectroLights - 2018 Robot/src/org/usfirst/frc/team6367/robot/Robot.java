@@ -9,7 +9,7 @@ import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.io.SensorInput;
 import org.usfirst.frc.team6367.robot.teleop.Elevator;
-import org.usfirst.frc.team6367.robot.teleop.Endeffector;
+import org.usfirst.frc.team6367.robot.teleop.EndEffector;
 import org.usfirst.frc.team6367.robot.teleop.TeleopControl;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -27,7 +27,7 @@ public class Robot extends MagicRobot {
 	public SendableChooser<AutonomousChoice> startingPos;
 	public DriverInput driverIn;	
 	public Elevator elevator;
-	public Endeffector endEffector;
+	public EndEffector endEffector;
 	public LightDrive lightDrive;
 	public RobotOutput robotOut;
 	public SensorInput sensors;
@@ -49,7 +49,7 @@ public class Robot extends MagicRobot {
 		*/
 		this.driverIn = new DriverInput();
 		this.elevator = new Elevator();
-		this.endEffector = new Endeffector();
+		this.endEffector = new EndEffector();
 		this.lightDrive = new LightDrive();
 		this.robotOut = new RobotOutput();
 		this.sensors = new SensorInput();

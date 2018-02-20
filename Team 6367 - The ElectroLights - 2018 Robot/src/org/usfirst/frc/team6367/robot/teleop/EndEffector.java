@@ -4,7 +4,7 @@ import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
 import io.github.robotpy.magicbot.MagicInject;
 
-public class Endeffector {
+public class EndEffector {
 
 	@MagicInject
 	RobotOutput robotOut;

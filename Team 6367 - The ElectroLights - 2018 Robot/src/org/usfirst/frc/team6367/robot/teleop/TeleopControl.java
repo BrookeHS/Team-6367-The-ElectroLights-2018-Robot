@@ -22,7 +22,7 @@ public class TeleopControl {
 	Elevator elevator;
 	
 	@MagicInject
-	Endeffector endEffector;
+	EndEffector endEffector;
 	
 	
 	public void teleopTasks() {

@@ -90,7 +90,7 @@ public class RobotOutput {
 		elevator.configClosedloopRamp(0.5, 0);
 
 		driveRightFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		driveRightFront.config_kP(0, 0.1, 0);
+		driveRightFront.config_kP(0, 0.8, 0);
 		driveRightFront.config_kI(0, 0, 0);
 		driveRightFront.config_kD(0, 0, 0);
 		driveRightFront.config_kF(0, 0, 0);
@@ -98,7 +98,7 @@ public class RobotOutput {
 		driveRightFront.configClosedloopRamp(0.5, 0);
 		
 		driveLeftFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		driveLeftFront.config_kP(0, 0.1, 0);
+		driveLeftFront.config_kP(0, 0.8, 0);
 		driveLeftFront.config_kI(0, 0, 0);
 		driveLeftFront.config_kD(0, 0, 0);
 		driveLeftFront.config_kF(0, 0, 0);

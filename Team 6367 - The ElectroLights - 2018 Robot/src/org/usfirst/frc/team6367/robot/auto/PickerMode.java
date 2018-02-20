@@ -3,6 +3,8 @@ package org.usfirst.frc.team6367.robot.auto;
 import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
+import org.usfirst.frc.team6367.robot.teleop.Elevator;
+import org.usfirst.frc.team6367.robot.teleop.EndEffector;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -22,6 +24,10 @@ public class PickerMode extends AutonomousStateMachine {
 	AutoTrajectory autoTrajectory;
 	@MagicInject
 	SendableChooser<AutonomousChoice> startingPos;
+	@MagicInject
+	Elevator elevator;
+	@MagicInject
+	EndEffector effector;
 
 	int startingLocation;
 	boolean scaleSide;
@@ -38,7 +44,21 @@ public class PickerMode extends AutonomousStateMachine {
 	public void driving() {
 		autoTrajectory.move();
 		if (autoTrajectory.isFinished()) {
-			nextState("do_ext");
+			nextState("liftElevator");
+		}
+	}
+	
+	public void liftElevator() {
+		elevator.upPosition();
+		if(elevator.upFinished()) {
+			nextState("deployBox");
+		}
+	}
+	
+	public void deployBox() {
+		effector.deployBox();
+		if(effector.finishedDeploy()) {
+			effector.stop();
 		}
 	}
 	

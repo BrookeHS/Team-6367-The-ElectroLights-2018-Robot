@@ -4,7 +4,7 @@ import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.io.SensorInput;
 import org.usfirst.frc.team6367.robot.teleop.Elevator;
-import org.usfirst.frc.team6367.robot.teleop.Endeffector;
+import org.usfirst.frc.team6367.robot.teleop.EndEffector;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import io.github.robotpy.magicbot.MagicInject;
@@ -25,7 +25,7 @@ public class SimpleDeposit extends AutonomousStateMachine {
 	@MagicInject
 	Elevator elevator;
 	@MagicInject
-	Endeffector endeffector;
+	EndEffector endeffector;
 	@MagicInject
 	SensorInput sensors;
 
