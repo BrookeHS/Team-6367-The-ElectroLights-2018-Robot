@@ -33,6 +33,6 @@ public class Elevator {
 		robotOut.elevator.set(-.8);
 	}
 	  public boolean upFinished() {
-		return robotOut.elevator.get() == 0;
+		return robotOut.elevator.getSelectedSensorPosition(0)>=-20.3*(1024)-400;
 	}
 }

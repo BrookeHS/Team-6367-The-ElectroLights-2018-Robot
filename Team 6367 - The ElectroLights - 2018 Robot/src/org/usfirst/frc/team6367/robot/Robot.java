@@ -34,20 +34,13 @@ public class Robot extends MagicRobot {
 	public TeleopControl teleopControl;
 	public org.usfirst.frc.team6367.robot.auto.AutoTrajectory autoTrajectory;
 	
-	private static final String kDriveStraight = "Drive Straight";
 	private static final String kPicker = "Picker";
-	private static final String kSimpleDeposit = "Simple Deposit";
 	
 
 	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void createObjects() {
-<<<<<<< HEAD
-		//addAutonomous(kPicker, new PickerMode());
-=======
-		
-		addAutonomous(kPicker, new PickerMode());
->>>>>>> b8aab2d906f33153f982b08e2c867c54295ccc9a
+//		addAutonomous(kPicker, new PickerMode());
 		this.driverIn = new DriverInput();
 		this.elevator = new Elevator();
 		this.endEffector = new EndEffector();

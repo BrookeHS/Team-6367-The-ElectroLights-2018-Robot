@@ -48,6 +48,7 @@ public class PickerMode extends AutonomousStateMachine {
 		}
 	}
 	
+	@State
 	public void liftElevator() {
 		elevator.upPosition();
 		if(elevator.upFinished()) {
@@ -55,11 +56,18 @@ public class PickerMode extends AutonomousStateMachine {
 		}
 	}
 	
+	@State
 	public void deployBox() {
 		effector.deployBox();
 		if(effector.finishedDeploy()) {
 			effector.stop();
+			nextState("lowerElevator");
 		}
+	}
+	
+	@State
+	public void lowerElevator() {
+		elevator.downPosition();
 	}
 	
 	

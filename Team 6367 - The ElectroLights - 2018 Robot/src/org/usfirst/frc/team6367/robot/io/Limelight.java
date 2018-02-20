@@ -4,10 +4,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 
-
-
-
-public class Limelight {
+	public class Limelight {
 
 	private static NetworkTableInstance lime_table = null;
 	
