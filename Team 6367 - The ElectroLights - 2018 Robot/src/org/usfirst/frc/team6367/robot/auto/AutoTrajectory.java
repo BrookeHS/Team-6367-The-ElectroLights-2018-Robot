@@ -94,5 +94,12 @@ public class AutoTrajectory {
 		robotOut.setDriveLeft(outputLeftEncoder + turn);
 		robotOut.setDriveRight(outputRightEncoder - turn);
 	}
-
+  
+  public boolean isFinished(){
+    if(robotOut.getEncoderLeftSide() == 0 && robotOut.getEncoderRightSide() == 0){
+      return true;
+  	}else{
+      return false;
+    }
+  }
 }
