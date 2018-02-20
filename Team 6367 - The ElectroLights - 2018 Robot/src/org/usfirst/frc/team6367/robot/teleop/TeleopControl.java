@@ -53,7 +53,7 @@ public class TeleopControl {
        		elevator.downPosition();
        	}
        	if(a.getRawButton(12)) {
-       		robotOut.dropServo.set(90);
+       		robotOut.turnServo(90);
        	}  	
        	robotOut.arcadeDrive(a);
 	}
