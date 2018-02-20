@@ -57,10 +57,10 @@ public class SimpleDeposit extends AutonomousStateMachine {
 
 	@State
 	public void elevator() {
-		elevator.goUp();
-		if (robotOut.atScale()) {
-			nextState("endEffector");
-		}
+//		elevator.goUp();
+//		if (robotOut.atScale()) {
+//			nextState("endEffector");
+//		}
 
 	}
 

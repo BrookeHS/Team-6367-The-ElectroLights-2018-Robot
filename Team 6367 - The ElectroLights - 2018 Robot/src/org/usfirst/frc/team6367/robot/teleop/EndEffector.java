@@ -12,7 +12,7 @@ public class EndEffector {
 	RobotOutput robotOut;
 	
 	public void  deployBox() {
-		robotOut.setEndEffector(.5);
+		robotOut.setEndEffector(0.7);
 		count++;
 	}
 	

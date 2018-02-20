@@ -93,9 +93,9 @@ public class RobotOutput {
 		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);
 
 		elevator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		elevator.config_kP(0, 0.8, 0);
+		elevator.config_kP(0, 0.6, 0);
 		elevator.config_kI(0, 0, 0);
-		elevator.config_kD(0, 0, 0);
+		elevator.config_kD(0, 0.1, 0);
 		elevator.config_kF(0, 0, 0);
 		elevator.configAllowableClosedloopError(0, (int) Math.round(.5 / kENCODERPERFOOT), 0);
 		elevator.configClosedloopRamp(0.5, 0);

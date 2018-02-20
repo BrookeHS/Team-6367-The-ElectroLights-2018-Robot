@@ -31,12 +31,6 @@ public class TeleopControl {
 	
 	public void teleopTasks() {
 		Joystick a = driverIn.getDriverStick();
-/*		if(a.getRawButton(6)) {
-			lightDrive.driveStraight();
-		} else {
-			lightDrive.turnController.disable();
-			robotOut.arcadeDrive(a);
-		}*/
        	if(a.getTrigger()){
     		endEffector.deployBox();
        	} else if(a.getRawButton(2)){
