@@ -6,11 +6,14 @@ import io.github.robotpy.magicbot.MagicInject;
 
 public class EndEffector {
 
+	double count = 0;
+	
 	@MagicInject
 	RobotOutput robotOut;
 	
 	public void  deployBox() {
 		robotOut.setEndEffector(.5);
+		count++;
 	}
 	
 	public void intake() {
@@ -20,5 +23,12 @@ public class EndEffector {
 	public void stop() {
 		robotOut.setEndEffector(0);
 	}	
+	public boolean finishedDeploy() {
+		if(count >-50) {
+			count = 0;
+			return true;
+		}
+		return false;
+	}
 }
 

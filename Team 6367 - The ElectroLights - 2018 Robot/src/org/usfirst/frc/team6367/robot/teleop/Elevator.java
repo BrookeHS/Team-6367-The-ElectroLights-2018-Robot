@@ -36,4 +36,7 @@ public class Elevator {
 	public void stop() {
 		robotOut.elevator.set(0);
 	}
+	public boolean upFinished() {
+		return robotOut.elevator.get() == 0;
+	}
 }
