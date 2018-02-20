@@ -41,12 +41,12 @@ public class TeleopControl {
       		endEffector.stop();
         }
        	if(a.getRawButton(5)) {
-       		elevator.goUp();
+       		elevator.upPosition();
        	} else if(a.getRawButton(3)) {
-       		elevator.goDown();
+       		elevator.midPosition();
        	}
-       	else {
-       		elevator.stop();
+       	if(a.getRawButton(4)){
+       		elevator.downPosition();
        	}
        	robotOut.arcadeDrive(a);
 	}
