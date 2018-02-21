@@ -35,6 +35,7 @@ public class PickerMode extends AutonomousStateMachine {
 	// This method is called once at the beginning of autonomous mode.
 	@Override
 	public void onEnabled() {
+		super.onEnabled();
 		choiceNum = startingPos.getSelected();
 		autoTrajectory.calculateTrajectory(choiceNum, gameData);
 		System.out.println("on enable");
@@ -42,8 +43,8 @@ public class PickerMode extends AutonomousStateMachine {
 	
 	@State(first=true)
 	public void driving() {
-		autoTrajectory.move();
 		System.out.println("driving...");
+		autoTrajectory.move();
 		if (autoTrajectory.isFinished()) {
 			nextState("liftElevator");
 		}
