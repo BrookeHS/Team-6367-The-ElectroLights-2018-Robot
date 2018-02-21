@@ -60,7 +60,7 @@ public class PathGenerator {
         new Waypoint(8.22959973665281,1.8287999414784,-1.570797)			
 		);	
 
-  	generateAndWrite("default",
+		generateAndWrite("default",
         new Waypoint(0,0,0),		
         new Waypoint(1,0,0)		
 		);	

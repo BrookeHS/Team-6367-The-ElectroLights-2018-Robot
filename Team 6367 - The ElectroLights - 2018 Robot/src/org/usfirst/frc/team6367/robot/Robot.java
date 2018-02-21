@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6367.robot;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
+import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
 import org.usfirst.frc.team6367.robot.auto.AutoTrajectory;
 import org.usfirst.frc.team6367.robot.auto.DriveStraight;
 import org.usfirst.frc.team6367.robot.auto.PickerMode;
@@ -32,7 +33,7 @@ public class Robot extends MagicRobot {
 	public RobotOutput robotOut;
 	public SensorInput sensors;
 	public TeleopControl teleopControl;
-	public org.usfirst.frc.team6367.robot.auto.AutoTrajectory autoTrajectory;
+	public AutoTrajectory autoTrajectory;
 	
 	private static final String kDriveStraight = "Drive Straight";
 	private static final String kPicker = "Picker";
@@ -43,7 +44,7 @@ public class Robot extends MagicRobot {
 	@Override
 	public void createObjects() {
 		startingPos = new SendableChooser<AutonomousChoice>();
-		addAutonomous(kPicker, new PickerMode());
+		addAutonomous(kPicker, new PickerMode(),true);
 		startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
 	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
 	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
@@ -72,7 +73,7 @@ public class Robot extends MagicRobot {
 	
 	@Override
 	public void teleopInit() {
-		
+       	autoTrajectory.calculateTrajectory(AutonomousChoice.AutoModeLeft, "LL");
 	}
 	
 	@Override

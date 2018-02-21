@@ -68,12 +68,12 @@ public class RobotOutput {
 		this.climber = new WPI_TalonSRX(5);
 		this.driveLeftFront 	= new WPI_TalonSRX(6); //
 		this.driveLeftRear		= new WPI_VictorSPX(1);
-		this.driveRightFront	= new WPI_TalonSRX(5); //
+		this.driveRightFront	= new WPI_TalonSRX(3); //
 		this.driveRightRear		= new WPI_VictorSPX(2);
 		this.elevator			= new WPI_TalonSRX(8);
 		this.endEffectorLeft	= new WPI_VictorSPX(7);
 		this.endEffectorRight	= new WPI_VictorSPX(4);
-		this.climber			= new WPI_TalonSRX(3);
+		this.climber			= new WPI_TalonSRX(5);
 
 		driveLeftFront.setInverted(true);
 		driveLeftRear.setInverted(true);
@@ -123,7 +123,7 @@ public class RobotOutput {
 	}
 
 	public int getEncoderLeftSide() {
-		return driveLeftFront.getSelectedSensorPosition(0);
+		return -1*driveLeftFront.getSelectedSensorPosition(0);
 	}
 
 	public int getEncoderRightSide() {

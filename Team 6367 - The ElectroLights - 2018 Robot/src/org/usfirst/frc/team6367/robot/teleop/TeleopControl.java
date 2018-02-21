@@ -1,11 +1,15 @@
 package org.usfirst.frc.team6367.robot.teleop;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
+import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
+import org.usfirst.frc.team6367.robot.auto.AutoTrajectory;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.robotpy.magicbot.MagicInject;
 
 public class TeleopControl {
@@ -25,10 +29,10 @@ public class TeleopControl {
 	@MagicInject
 	EndEffector endEffector;
 	
+	@MagicInject
+	AutoTrajectory autoTrajectory;
 	
-	
-	
-	
+
 	public void teleopTasks() {
 		Joystick a = driverIn.getDriverStick();
        	if(a.getTrigger()){
@@ -51,8 +55,17 @@ public class TeleopControl {
        	}  	
        	else if(a.getRawButton(8)) {
        		robotOut.turnServo(0.99);
-       	}  	
-       	robotOut.arcadeDrive(a);
+       	}  
+       	if(a.getRawButton(9)) {
+       		this.autoTrajectory.move();
+       	}
+       	else{
+       		robotOut.arcadeDrive(a);
+       	}
+       	SmartDashboard.putNumber("leftEncoder", robotOut.getEncoderLeftSide());
+       	SmartDashboard.putNumber("rightEncoder", robotOut.getEncoderRightSide());
+       	SmartDashboard.updateValues();
+       	LiveWindow.updateValues();
 	}
 }
 	
