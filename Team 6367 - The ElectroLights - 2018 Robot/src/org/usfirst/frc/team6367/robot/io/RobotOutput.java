@@ -1,5 +1,7 @@
 package org.usfirst.frc.team6367.robot.io;
 
+import org.usfirst.frc.team6367.robot.Robot;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -15,6 +17,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RobotOutput {
 
@@ -46,7 +49,7 @@ public class RobotOutput {
 	public static final int CLOSEENOUGH = (int) Math.round(.5 / kENCODERPERFOOT);
 	public static final int CONFIGCLOSEENOUGH = CLOSEENOUGH / 2;
 	public static final double ELEVATORPERFOOT = ((6 * Math.PI) / 1024);
-	public static final int ELEVATORTOLERANCE = (int) Math.round(.2 / ELEVATORPERFOOT);
+	public static final int ELEVATORTOLERANCE = 240;
 	public static final int CONFIGELEVATORTOLERANCE = ELEVATORTOLERANCE / 2;
 
 	/*
@@ -116,6 +119,7 @@ public class RobotOutput {
 		driveLeftFront.configAllowableClosedloopError(0, (int) Math.round(.5 / kENCODERPERFOOT), 0);
 		driveLeftFront.configClosedloopRamp(0.5, 0);
 	}
+	
 
 	public void resetDriveEncoders() {
 		this.driveRightFront.setSelectedSensorPosition(0, 0, 0);
@@ -178,7 +182,8 @@ public class RobotOutput {
 	}
 
 	public void arcadeDrive(Joystick driveStick) {
-		light_drive.arcadeDrive(compDeadBand(driveStick.getY()), -compDeadBand(driveStick.getX()), true);
+		double twitchy = SmartDashboard.getNumber("twitchy", Robot.kTwitchy);
+		light_drive.arcadeDrive(compDeadBand(driveStick.getY()), -compDeadBand(driveStick.getX()*twitchy), true);
 	}
 
 	public double compDeadBand(double input) {

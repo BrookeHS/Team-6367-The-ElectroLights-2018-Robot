@@ -7,7 +7,9 @@ import org.usfirst.frc.team6367.robot.teleop.Elevator;
 import org.usfirst.frc.team6367.robot.teleop.EndEffector;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.robotpy.magicbot.MagicAutonomous;
 import io.github.robotpy.magicbot.MagicInject;
 import io.github.robotpy.magicbot.sm.AutonomousStateMachine;
@@ -38,12 +40,10 @@ public class PickerMode extends AutonomousStateMachine {
 		super.onEnabled();
 		choiceNum = startingPos.getSelected();
 		autoTrajectory.calculateTrajectory(choiceNum, gameData);
-		System.out.println("on enable");
 	}
 	
 	@State(first=true)
 	public void driving() {
-		System.out.println("driving...");
 		autoTrajectory.move();
 		if (autoTrajectory.isFinished()) {
 			nextState("liftElevator");
@@ -55,6 +55,7 @@ public class PickerMode extends AutonomousStateMachine {
 		elevator.upPosition();
 		System.out.println("lifting");
 		if(elevator.upFinished()) {
+			System.out.println("finished lifting");
 			nextState("deployBox");
 		}
 	}
@@ -62,8 +63,12 @@ public class PickerMode extends AutonomousStateMachine {
 	@State
 	public void deployBox() {
 		endEffector.deployBox();
-		if(endEffector.finishedDeploy()) {
+       	SmartDashboard.putNumber("shooter", endEffector.returnCount());
+       	SmartDashboard.updateValues();
+       	LiveWindow.updateValues();
+       	if(endEffector.finishedDeploy()) {
 			endEffector.stop();
+			this.done();
 		}
 	}
 	

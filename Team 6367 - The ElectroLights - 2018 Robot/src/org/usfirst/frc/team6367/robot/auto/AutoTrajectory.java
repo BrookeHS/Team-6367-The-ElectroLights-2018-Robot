@@ -17,7 +17,7 @@ import jaci.pathfinder.modifiers.TankModifier;
 
 public class AutoTrajectory {
 
-	public static final int kEncodersTicksPerRev = 1024;
+	public static final int kEncodersTicksPerRev = 1420;
 	public static final double kWheelDiameter = 0.1524;
 	public static final double kP_Encoder = 0.8;
 	public static final double kI_Encoder = 0.0;

@@ -39,17 +39,23 @@ public class Robot extends MagicRobot {
 	private static final String kPicker = "Picker";
 	private static final String kSimpleDeposit = "Simple Deposit";
 	
+	public static final double kTwitchy = 0.75;
+	
 
 	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void createObjects() {
 		startingPos = new SendableChooser<AutonomousChoice>();
-		addAutonomous(kPicker, new PickerMode(),true);
 		startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
 	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
 	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
 	    SmartDashboard.putData("Trajectory",startingPos);
-		this.driverIn = new DriverInput();
+		
+	    SmartDashboard.putNumber("twitchy", kTwitchy);
+	    
+		addAutonomous(kPicker, new PickerMode(),true);
+		
+	    this.driverIn = new DriverInput();
 		this.elevator = new Elevator();
 		this.endEffector = new EndEffector();
 		this.lightDrive = new LightDrive();
@@ -73,18 +79,10 @@ public class Robot extends MagicRobot {
 	
 	@Override
 	public void teleopInit() {
-       	autoTrajectory.calculateTrajectory(AutonomousChoice.AutoModeLeft, "LL");
 	}
 	
 	@Override
 	public void teleopPeriodic() {
 		teleopControl.teleopTasks();
 	}
-
-	 public void createChoices(){
-	  	startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
-	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
-	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
-	    SmartDashboard.putData("Trajectory",startingPos);
-	  }
 }

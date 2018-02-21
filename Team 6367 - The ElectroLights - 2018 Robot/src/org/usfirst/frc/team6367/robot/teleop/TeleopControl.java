@@ -56,14 +56,11 @@ public class TeleopControl {
        	else if(a.getRawButton(8)) {
        		robotOut.turnServo(0.99);
        	}  
-       	if(a.getRawButton(9)) {
-       		this.autoTrajectory.move();
-       	}
-       	else{
-       		robotOut.arcadeDrive(a);
-       	}
+       	robotOut.arcadeDrive(a);
+       	
        	SmartDashboard.putNumber("leftEncoder", robotOut.getEncoderLeftSide());
        	SmartDashboard.putNumber("rightEncoder", robotOut.getEncoderRightSide());
+       	SmartDashboard.putNumber("elevator", robotOut.elevator.getClosedLoopError(0));
        	SmartDashboard.updateValues();
        	LiveWindow.updateValues();
 	}
