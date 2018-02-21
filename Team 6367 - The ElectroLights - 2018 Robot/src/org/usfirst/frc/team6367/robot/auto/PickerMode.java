@@ -37,24 +37,28 @@ public class PickerMode extends AutonomousStateMachine {
 	public void onEnabled() {
 		choiceNum = startingPos.getSelected();
 		autoTrajectory.calculateTrajectory(choiceNum, gameData);
-
+		System.out.println("on enable");
 	}
 	
 	@State(first=true)
 	public void driving() {
 		autoTrajectory.move();
+		System.out.println("driving...");
 		if (autoTrajectory.isFinished()) {
 			nextState("liftElevator");
 		}
 	}
 	
+	@State
 	public void liftElevator() {
 		elevator.upPosition();
+		System.out.println("lifting");
 		if(elevator.upFinished()) {
 			nextState("deployBox");
 		}
 	}
-	
+
+	@State
 	public void deployBox() {
 		endEffector.deployBox();
 		if(endEffector.finishedDeploy()) {
