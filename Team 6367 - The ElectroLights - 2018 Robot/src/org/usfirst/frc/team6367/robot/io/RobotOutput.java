@@ -84,7 +84,11 @@ public class RobotOutput {
 		driveLeftFront.setNeutralMode(NeutralMode.Brake);
 		driveLeftRear.setNeutralMode(NeutralMode.Brake);
 		
-		
+		// default ramp for everyone
+		driveLeftFront.configOpenloopRamp(0, 0);
+		driveRightFront.configOpenloopRamp(0, 0);
+		driveLeftRear.configOpenloopRamp(0, 0);
+		driveRightRear.configOpenloopRamp(0, 0);
 		
 		driveLeftRear.follow(driveLeftFront);
 		driveRightRear.follow(driveRightFront);
@@ -206,10 +210,9 @@ public class RobotOutput {
 	}
 	
 	public void setRamp(double val) {
+		// only configure the leaders, don't need to config the followers
 		driveLeftFront.configOpenloopRamp(val, 0);
-		driveLeftRear.configOpenloopRamp(val, 0);
 		driveRightFront.configOpenloopRamp(val, 0);
-		driveRightRear.configOpenloopRamp(val, 0);
 	}
 
 	public double compDeadBand(double input) {

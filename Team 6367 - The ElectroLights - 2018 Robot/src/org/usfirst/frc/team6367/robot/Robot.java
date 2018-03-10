@@ -93,7 +93,7 @@ public class Robot extends MagicRobot {
 	
 	@Override
 	public void teleopInit() {
-		robotOut.setRamp(0.25);
+		robotOut.setRamp(0.15);
 	}
 	
 	@Override
