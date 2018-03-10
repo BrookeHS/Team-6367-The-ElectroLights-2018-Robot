@@ -73,14 +73,17 @@ public class EndEffector implements MagicComponent {
 		
 		switch (state) {
 		case DEPLOY:
-			robotOut.setEndEffector(0.7);
+			//robotOut.setEndEffector(0.7);
+			robotOut.setEndEffector(0.5);
 			count++;
 			break;
 		case INTAKE:
-			robotOut.setEndEffector(-.7);
+			//robotOut.setEndEffector(-.7);
+			robotOut.setEndEffector(-.4);
 			break;
 		case EINTAKE:
-			robotOut.setEndEffector(-.7);
+			//robotOut.setEndEffector(-.7);
+			robotOut.setEndEffector(-.5);
 			break;
 		case STOP:
 			robotOut.setEndEffector(0);
