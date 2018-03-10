@@ -7,7 +7,9 @@ import org.usfirst.frc.team6367.robot.teleop.Elevator;
 import org.usfirst.frc.team6367.robot.teleop.EndEffector;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.robotpy.magicbot.MagicAutonomous;
 import io.github.robotpy.magicbot.MagicInject;
 import io.github.robotpy.magicbot.sm.AutonomousStateMachine;
@@ -35,9 +37,9 @@ public class PickerMode extends AutonomousStateMachine {
 	// This method is called once at the beginning of autonomous mode.
 	@Override
 	public void onEnabled() {
+		super.onEnabled();
 		choiceNum = startingPos.getSelected();
 		autoTrajectory.calculateTrajectory(choiceNum, gameData);
-
 	}
 	
 	@State(first=true)
@@ -48,17 +50,25 @@ public class PickerMode extends AutonomousStateMachine {
 		}
 	}
 	
+	@State
 	public void liftElevator() {
 		elevator.upPosition();
+		System.out.println("lifting");
 		if(elevator.upFinished()) {
+			System.out.println("finished lifting");
 			nextState("deployBox");
 		}
 	}
-	
+
+	@State
 	public void deployBox() {
 		endEffector.deployBox();
-		if(endEffector.finishedDeploy()) {
+       	SmartDashboard.putNumber("shooter", endEffector.returnCount());
+       	SmartDashboard.updateValues();
+       	LiveWindow.updateValues();
+       	if(endEffector.finishedDeploy()) {
 			endEffector.stop();
+			this.done();
 		}
 	}
 	

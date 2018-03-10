@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6367.robot;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
+import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
 import org.usfirst.frc.team6367.robot.auto.AutoTrajectory;
 import org.usfirst.frc.team6367.robot.auto.DriveStraight;
 import org.usfirst.frc.team6367.robot.auto.PickerMode;
@@ -32,23 +33,29 @@ public class Robot extends MagicRobot {
 	public RobotOutput robotOut;
 	public SensorInput sensors;
 	public TeleopControl teleopControl;
-	public org.usfirst.frc.team6367.robot.auto.AutoTrajectory autoTrajectory;
+	public AutoTrajectory autoTrajectory;
 	
 	private static final String kDriveStraight = "Drive Straight";
 	private static final String kPicker = "Picker";
 	private static final String kSimpleDeposit = "Simple Deposit";
+	
+	public static final double kTwitchy = 0.75;
 	
 
 	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void createObjects() {
 		startingPos = new SendableChooser<AutonomousChoice>();
-		addAutonomous(kPicker, new PickerMode());
 		startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
 	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
 	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
 	    SmartDashboard.putData("Trajectory",startingPos);
-		this.driverIn = new DriverInput();
+		
+	    SmartDashboard.putNumber("twitchy", kTwitchy);
+	    
+		addAutonomous(kPicker, new PickerMode(),true);
+		
+	    this.driverIn = new DriverInput();
 		this.elevator = new Elevator();
 		this.endEffector = new EndEffector();
 		this.lightDrive = new LightDrive();
@@ -72,18 +79,10 @@ public class Robot extends MagicRobot {
 	
 	@Override
 	public void teleopInit() {
-		
 	}
 	
 	@Override
 	public void teleopPeriodic() {
 		teleopControl.teleopTasks();
 	}
-
-	 public void createChoices(){
-	  	startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
-	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
-	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
-	    SmartDashboard.putData("Trajectory",startingPos);
-	  }
 }
