@@ -63,6 +63,8 @@ public class Robot extends MagicRobot {
 		this.sensors = new SensorInput();
 		this.teleopControl = new TeleopControl();
 		this.autoTrajectory = new AutoTrajectory();
+		
+		addComponent(this.endEffector);
 	}
 
 	// Initialization of code for the Disabled portion of the match.
