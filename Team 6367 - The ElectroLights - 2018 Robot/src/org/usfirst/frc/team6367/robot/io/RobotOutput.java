@@ -65,7 +65,6 @@ public class RobotOutput {
 	 */
 	public RobotOutput() {
 		dropServo = new Servo(0);
-		dropServo.set(0.99);
 
 		this.driveLeftFront = new WPI_TalonSRX(6); //
 		this.driveLeftRear = new WPI_VictorSPX(1);
@@ -206,10 +205,6 @@ public class RobotOutput {
 			return 0;
 		}
 		return Math.copySign((Math.abs(input) - DEADBAND) / (1 - DEADBAND), input);
-	}
-
-	public void turnServo(double position) {
-		dropServo.set(position);
 	}
 
 }

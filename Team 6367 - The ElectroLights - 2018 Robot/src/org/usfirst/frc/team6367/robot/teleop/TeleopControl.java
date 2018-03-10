@@ -51,10 +51,10 @@ public class TeleopControl {
        		elevator.downPosition();
        	}
        	if(a.getRawButton(7)) {
-       		robotOut.turnServo(0.0);
+       		elevator.latchArm();
        	}  	
        	else if(a.getRawButton(8)) {
-       		robotOut.turnServo(0.99);
+       		elevator.unlatchArm();
        	}  
        	robotOut.arcadeDrive(a);
        	
