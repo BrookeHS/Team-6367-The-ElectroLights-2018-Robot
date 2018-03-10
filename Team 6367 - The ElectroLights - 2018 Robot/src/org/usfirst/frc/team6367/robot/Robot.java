@@ -13,6 +13,9 @@ import org.usfirst.frc.team6367.robot.teleop.Elevator;
 import org.usfirst.frc.team6367.robot.teleop.EndEffector;
 import org.usfirst.frc.team6367.robot.teleop.TeleopControl;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.MotorSafety;
+import edu.wpi.first.wpilibj.MotorSafetyHelper;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.robotpy.magicbot.MagicRobot;
@@ -46,6 +49,7 @@ public class Robot extends MagicRobot {
 	// Initialization of the robot at the beginning of the match.
 	@Override
 	public void createObjects() {
+		
 		startingPos = new SendableChooser<AutonomousChoice>();
 		startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
 	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
@@ -67,6 +71,7 @@ public class Robot extends MagicRobot {
 		this.autoTrajectory = new AutoTrajectory();
 		
 		addComponent(this.endEffector);
+		addComponent(this.elevator);
 	}
 
 	// Initialization of code for the Disabled portion of the match.
@@ -82,7 +87,13 @@ public class Robot extends MagicRobot {
 	}
 	
 	@Override
+	protected void autonomousInit() {
+		robotOut.setRamp(0);
+	}
+	
+	@Override
 	public void teleopInit() {
+		robotOut.setRamp(0.25);
 	}
 	
 	@Override

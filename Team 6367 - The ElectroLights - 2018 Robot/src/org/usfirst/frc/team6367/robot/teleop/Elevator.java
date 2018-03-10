@@ -34,11 +34,11 @@ public class Elevator implements MagicComponent {
 		robotOut.elevatorMotor.set(ControlMode.Position, 0);
 	}
 	public void midPosition() {
-		robotOut.elevatorMotor.set(ControlMode.Position, -14*(1024));		
+		robotOut.elevatorMotor.set(ControlMode.Position, -6*(1024));		
 	}
 	
 	public double getPosition() {
-		return robotOut.elevatorMotor.getSensorCollection().getQuadraturePosition() * 1024.0;
+		return robotOut.elevatorMotor.getSensorCollection().getQuadraturePosition() / 1024.0;
 	}
 	
 	public boolean upFinished() {
@@ -70,10 +70,10 @@ public class Elevator implements MagicComponent {
 		
 		switch (latchState) {
 		case LATCHED:
-			robotOut.dropServo.set(0.0);
+			robotOut.dropServo.set(0.99);
 			break;
 		case UNLATCHED:
-			robotOut.dropServo.set(0.99);
+			robotOut.dropServo.set(0.0);
 			break;
 		}
 		

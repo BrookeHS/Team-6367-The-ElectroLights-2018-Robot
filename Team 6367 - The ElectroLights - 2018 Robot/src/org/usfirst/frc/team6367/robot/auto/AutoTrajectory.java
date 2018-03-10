@@ -19,9 +19,9 @@ public class AutoTrajectory {
 
 	public static final int kEncodersTicksPerRev = 1420;
 	public static final double kWheelDiameter = 0.1524;
-	public static final double kP_Encoder = 0.8;
+	public static final double kP_Encoder = 1;
 	public static final double kI_Encoder = 0.0;
-	public static final double kD_Encoder = 0.0;
+	public static final double kD_Encoder = 0.01;
 	public static final double kMaxVelocity = 1.7;
 	public static final double gp = 0.02;
 	public static final double gd = 0.0025;
@@ -63,6 +63,9 @@ public class AutoTrajectory {
 		} else {
 			myFile = new File("/home/lvuser/trajectories/default.csv");
 		}
+		
+		System.out.println("Using trajectory " + myFile.getAbsolutePath());
+		
 		Trajectory trajectory = Pathfinder.readFromCSV(myFile);
 
 		// Modifies trajectory based on how wide the wheels are.

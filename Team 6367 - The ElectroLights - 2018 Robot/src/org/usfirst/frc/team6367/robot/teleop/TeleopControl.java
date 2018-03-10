@@ -6,6 +6,9 @@ import org.usfirst.frc.team6367.robot.auto.AutoTrajectory;
 import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -55,12 +58,20 @@ public class TeleopControl {
        	}  	
        	else if(a.getRawButton(8)) {
        		elevator.unlatchArm();
-       	}  
+       	}
+       	
+       	if (!DriverStation.getInstance().isFMSAttached() && a.getRawButton(11)) {
+       		robotOut.elevatorMotor.set(ControlMode.PercentOutput, a.getZ());
+       	}
+       	
        	robotOut.arcadeDrive(a);
        	
        	SmartDashboard.putNumber("leftEncoder", robotOut.getEncoderLeftSide());
        	SmartDashboard.putNumber("rightEncoder", robotOut.getEncoderRightSide());
-       	SmartDashboard.putNumber("elevator", robotOut.elevatorMotor.getClosedLoopError(0));
+       	SmartDashboard.putNumber("elevatorError", robotOut.elevatorMotor.getClosedLoopError(0));
+       	
+       	SmartDashboard.putNumber("elevatorHeight", elevator.getPosition());
+       	
        	SmartDashboard.updateValues();
        	LiveWindow.updateValues();
 	}

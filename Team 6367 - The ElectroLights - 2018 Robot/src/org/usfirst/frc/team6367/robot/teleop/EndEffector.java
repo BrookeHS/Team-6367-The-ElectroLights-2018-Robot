@@ -19,13 +19,20 @@ public class EndEffector implements MagicComponent {
 	
 	NetworkTableEntry accelLimit = SmartDashboard.getEntry("accelLimit");
 	
+	static final double kDefaultAccel = 40.0;
+	
 	enum EffectorState {
 		DEPLOY,
 		INTAKE,
+		EINTAKE,
 		STOP
 	}
 	
 	EffectorState state = EffectorState.STOP;
+	
+	public EndEffector() {
+		accelLimit.setNumber(kDefaultAccel);
+	}
 	
 	public void deployBox() {
 		state = EffectorState.DEPLOY;
@@ -54,11 +61,14 @@ public class EndEffector implements MagicComponent {
 	@Override
 	public void execute() {
 		// if rotational acceleration is greater than N, force intake to happen
-		double accel = sensors.ahrs.getRawGyroX();
-		SmartDashboard.putNumber("accel_x", accel);
+		double accel = sensors.ahrs.getRawGyroZ();
+
+		SmartDashboard.putNumber("accel_x", sensors.ahrs.getRawGyroX());
+		SmartDashboard.putNumber("accel_y", sensors.ahrs.getRawGyroY());
+		SmartDashboard.putNumber("accel_z", sensors.ahrs.getRawGyroZ());
 		
-		if (Math.abs(accel) > accelLimit.getDouble(45)) {
-			state = EffectorState.INTAKE;
+		if (Math.abs(accel) > accelLimit.getDouble(kDefaultAccel)) {
+			state = EffectorState.EINTAKE;
 		}
 		
 		switch (state) {
@@ -67,7 +77,10 @@ public class EndEffector implements MagicComponent {
 			count++;
 			break;
 		case INTAKE:
-			robotOut.setEndEffector(-.5);
+			robotOut.setEndEffector(-.7);
+			break;
+		case EINTAKE:
+			robotOut.setEndEffector(-.7);
 			break;
 		case STOP:
 			robotOut.setEndEffector(0);

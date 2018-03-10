@@ -74,14 +74,6 @@ public class RobotOutput {
 		this.endEffectorLeft = new WPI_VictorSPX(7);
 		this.endEffectorRight = new WPI_VictorSPX(4);
 		this.climber = new WPI_TalonSRX(5);
-		this.driveLeftFront 	= new WPI_TalonSRX(6); //
-		this.driveLeftRear		= new WPI_VictorSPX(1);
-		this.driveRightFront	= new WPI_TalonSRX(3); //
-		this.driveRightRear		= new WPI_VictorSPX(2);
-		this.elevatorMotor			= new WPI_TalonSRX(8);
-		this.endEffectorLeft	= new WPI_VictorSPX(7);
-		this.endEffectorRight	= new WPI_VictorSPX(4);
-		this.climber			= new WPI_TalonSRX(5);
 
 		driveLeftFront.setInverted(true);
 		driveLeftRear.setInverted(true);
@@ -91,15 +83,22 @@ public class RobotOutput {
 		driveRightFront.setNeutralMode(NeutralMode.Brake);
 		driveLeftFront.setNeutralMode(NeutralMode.Brake);
 		driveLeftRear.setNeutralMode(NeutralMode.Brake);
+		
+		
+		
 		driveLeftRear.follow(driveLeftFront);
 		driveRightRear.follow(driveRightFront);
+		
+		
 
 		// SpeedControllerGroup drive_left = new SpeedControllerGroup(driveLeftFront,
 		// driveLeftRear);
 		// SpeedControllerGroup drive_right = new SpeedControllerGroup(driveRightFront,
 		// driveRightRear);
 		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);
-
+		this.light_drive.setSafetyEnabled(false);
+		
+		
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		elevatorMotor.config_kP(0, 0.6, 0);
 		elevatorMotor.config_kI(0, 0, 0);
@@ -193,12 +192,24 @@ public class RobotOutput {
 		double y = driveStick.getY();
 		
 		if (elevator.getPosition() < SmartDashboard.getNumber("accelElevatorHeight", Robot.kElevator)) {
-			x = x / 2.0;
-			y = y / 2.0;
+			x = x * .8;
+			y = y * .7;
 		}
 		
 		double twitchy = SmartDashboard.getNumber("twitchy", Robot.kTwitchy);
 		light_drive.arcadeDrive(compDeadBand(y), -compDeadBand(x*twitchy), true);
+	}
+	
+	public void stopDriving() {
+		this.driveLeftFront.set(0);
+		this.driveRightFront.set(0);
+	}
+	
+	public void setRamp(double val) {
+		driveLeftFront.configOpenloopRamp(val, 0);
+		driveLeftRear.configOpenloopRamp(val, 0);
+		driveRightFront.configOpenloopRamp(val, 0);
+		driveRightRear.configOpenloopRamp(val, 0);
 	}
 
 	public double compDeadBand(double input) {

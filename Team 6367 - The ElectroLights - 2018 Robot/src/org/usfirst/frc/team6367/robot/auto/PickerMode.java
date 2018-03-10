@@ -14,10 +14,10 @@ import io.github.robotpy.magicbot.MagicAutonomous;
 import io.github.robotpy.magicbot.MagicInject;
 import io.github.robotpy.magicbot.sm.AutonomousStateMachine;
 import io.github.robotpy.magicbot.sm.State;
+import io.github.robotpy.magicbot.sm.TimedState;
 
 public class PickerMode extends AutonomousStateMachine {
 
-	String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	AutonomousChoice choiceNum;
 
 	@MagicInject
@@ -39,6 +39,7 @@ public class PickerMode extends AutonomousStateMachine {
 	public void onEnabled() {
 		super.onEnabled();
 		choiceNum = startingPos.getSelected();
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		autoTrajectory.calculateTrajectory(choiceNum, gameData);
 	}
 	
@@ -46,16 +47,15 @@ public class PickerMode extends AutonomousStateMachine {
 	public void driving() {
 		autoTrajectory.move();
 		if (autoTrajectory.isFinished()) {
+			robotOut.stopDriving();
 			nextState("liftElevator");
 		}
 	}
 	
-	@State
+	@TimedState(duration=6.0, nextState="deployBox")
 	public void liftElevator() {
 		elevator.upPosition();
-		System.out.println("lifting");
 		if(elevator.upFinished()) {
-			System.out.println("finished lifting");
 			nextState("deployBox");
 		}
 	}
@@ -68,11 +68,10 @@ public class PickerMode extends AutonomousStateMachine {
        	LiveWindow.updateValues();
        	if(endEffector.finishedDeploy()) {
 			endEffector.stop();
+			elevator.downPosition();
 			this.done();
 		}
 	}
-	
-	
 }
 
 /*
