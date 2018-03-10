@@ -34,7 +34,11 @@ public class Elevator implements MagicComponent {
 		robotOut.elevatorMotor.set(ControlMode.Position, 0);
 	}
 	public void midPosition() {
-		robotOut.elevatorMotor.set(ControlMode.Position, -6*(1024));		
+		robotOut.elevatorMotor.set(ControlMode.Position, -7*(1024));		
+	}
+	
+	public void upperMiddlePosition() {
+		robotOut.elevatorMotor.set(ControlMode.Position, -8.5*(1024));
 	}
 	
 	public double getPosition() {

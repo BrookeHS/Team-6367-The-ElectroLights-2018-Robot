@@ -52,7 +52,11 @@ public class TeleopControl {
        	}
        	else if(a.getRawButton(4)){
        		elevator.downPosition();
+       	}else if(a.getRawButton(6)){
+       		elevator.upperMiddlePosition();
        	}
+       	
+       	
        	if(a.getRawButton(7)) {
        		elevator.latchArm();
        	}  	
