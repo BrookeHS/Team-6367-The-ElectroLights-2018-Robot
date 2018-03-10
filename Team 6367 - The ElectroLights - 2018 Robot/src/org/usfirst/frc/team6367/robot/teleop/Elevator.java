@@ -17,17 +17,21 @@ public class Elevator {
 	public final static double kground = 0;
 	
 	public void upPosition() {
-		robotOut.elevator.set(ControlMode.Position, -20.4*(1024));
+		robotOut.elevatorMotor.set(ControlMode.Position, -20.4*(1024));
 	}
 	public void downPosition() {
-		robotOut.elevator.set(ControlMode.Position, 0);
+		robotOut.elevatorMotor.set(ControlMode.Position, 0);
 	}
 	public void midPosition() {
-		robotOut.elevator.set(ControlMode.Position, -14*(1024));		
+		robotOut.elevatorMotor.set(ControlMode.Position, -14*(1024));		
+	}
+	
+	public double getPosition() {
+		return robotOut.elevatorMotor.getSensorCollection().getQuadraturePosition() * 1024.0;
 	}
 	
 	public boolean upFinished() {
-		return Math.abs(robotOut.elevator.getClosedLoopError(0)) <= 300
-				&& Math.abs(robotOut.elevator.getClosedLoopError(0)) >= 70;
+		return Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) <= 300
+				&& Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) >= 70;
 	}
 }

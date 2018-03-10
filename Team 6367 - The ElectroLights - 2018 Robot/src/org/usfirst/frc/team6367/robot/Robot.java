@@ -40,6 +40,7 @@ public class Robot extends MagicRobot {
 	private static final String kSimpleDeposit = "Simple Deposit";
 	
 	public static final double kTwitchy = 0.75;
+	public static final double kElevator = -14;
 	
 
 	// Initialization of the robot at the beginning of the match.
@@ -52,6 +53,7 @@ public class Robot extends MagicRobot {
 	    SmartDashboard.putData("Trajectory",startingPos);
 		
 	    SmartDashboard.putNumber("twitchy", kTwitchy);
+	    SmartDashboard.putNumber("accelElevatorHeight", kElevator);
 	    
 		addAutonomous(kPicker, new PickerMode(),true);
 		

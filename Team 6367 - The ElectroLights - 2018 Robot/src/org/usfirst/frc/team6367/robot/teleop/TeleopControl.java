@@ -60,7 +60,7 @@ public class TeleopControl {
        	
        	SmartDashboard.putNumber("leftEncoder", robotOut.getEncoderLeftSide());
        	SmartDashboard.putNumber("rightEncoder", robotOut.getEncoderRightSide());
-       	SmartDashboard.putNumber("elevator", robotOut.elevator.getClosedLoopError(0));
+       	SmartDashboard.putNumber("elevator", robotOut.elevatorMotor.getClosedLoopError(0));
        	SmartDashboard.updateValues();
        	LiveWindow.updateValues();
 	}

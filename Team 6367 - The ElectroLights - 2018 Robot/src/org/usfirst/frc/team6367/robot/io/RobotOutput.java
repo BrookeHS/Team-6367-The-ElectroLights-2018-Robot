@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6367.robot.io;
 
 import org.usfirst.frc.team6367.robot.Robot;
+import org.usfirst.frc.team6367.robot.teleop.Elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import io.github.robotpy.magicbot.MagicInject;
 
 public class RobotOutput {
 
@@ -29,12 +31,16 @@ public class RobotOutput {
 	// Follows driveRightFront
 	private WPI_VictorSPX driveRightRear;
 
-	public WPI_TalonSRX elevator;
+	public WPI_TalonSRX elevatorMotor;
 	private WPI_VictorSPX endEffectorLeft;
 	private WPI_VictorSPX endEffectorRight;
 	private WPI_TalonSRX climber;
 
 	public Servo dropServo;
+	
+	@MagicInject
+	Elevator elevator;
+	
 	/*
 	 * There needs to be 4 talon srxs there need to be victor spx
 	 * 
@@ -65,7 +71,7 @@ public class RobotOutput {
 		this.driveLeftRear = new WPI_VictorSPX(1);
 		this.driveRightFront = new WPI_TalonSRX(3); //
 		this.driveRightRear = new WPI_VictorSPX(2);
-		this.elevator = new WPI_TalonSRX(8);
+		this.elevatorMotor = new WPI_TalonSRX(8);
 		this.endEffectorLeft = new WPI_VictorSPX(7);
 		this.endEffectorRight = new WPI_VictorSPX(4);
 		this.climber = new WPI_TalonSRX(5);
@@ -73,7 +79,7 @@ public class RobotOutput {
 		this.driveLeftRear		= new WPI_VictorSPX(1);
 		this.driveRightFront	= new WPI_TalonSRX(3); //
 		this.driveRightRear		= new WPI_VictorSPX(2);
-		this.elevator			= new WPI_TalonSRX(8);
+		this.elevatorMotor			= new WPI_TalonSRX(8);
 		this.endEffectorLeft	= new WPI_VictorSPX(7);
 		this.endEffectorRight	= new WPI_VictorSPX(4);
 		this.climber			= new WPI_TalonSRX(5);
@@ -95,13 +101,13 @@ public class RobotOutput {
 		// driveRightRear);
 		this.light_drive = new DifferentialDrive(driveLeftFront, driveRightFront);
 
-		elevator.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		elevator.config_kP(0, 0.6, 0);
-		elevator.config_kI(0, 0, 0);
-		elevator.config_kD(0, 0.1, 0);
-		elevator.config_kF(0, 0, 0);
-		elevator.configAllowableClosedloopError(0, (int) Math.round(.5 / kENCODERPERFOOT), 0);
-		elevator.configClosedloopRamp(0.5, 0);
+		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		elevatorMotor.config_kP(0, 0.6, 0);
+		elevatorMotor.config_kI(0, 0, 0);
+		elevatorMotor.config_kD(0, 0.1, 0);
+		elevatorMotor.config_kF(0, 0, 0);
+		elevatorMotor.configAllowableClosedloopError(0, (int) Math.round(.5 / kENCODERPERFOOT), 0);
+		elevatorMotor.configClosedloopRamp(0.5, 0);
 
 		driveRightFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		driveRightFront.config_kP(0, 0.8, 0);
@@ -152,8 +158,8 @@ public class RobotOutput {
 	}
 
 	public boolean atScale() {
-		return Math.abs(elevator.getClosedLoopError(0)) <= ELEVATORTOLERANCE
-				&& Math.abs(elevator.getClosedLoopError(0)) <= ELEVATORTOLERANCE;
+		return Math.abs(elevatorMotor.getClosedLoopError(0)) <= ELEVATORTOLERANCE
+				&& Math.abs(elevatorMotor.getClosedLoopError(0)) <= ELEVATORTOLERANCE;
 	}
 
 	public void setDriveRight(double output) {
@@ -161,7 +167,7 @@ public class RobotOutput {
 	}
 
 	public void setElevator(double position) {
-		this.elevator.set(ControlMode.Position, position / ELEVATORPERFOOT);
+		this.elevatorMotor.set(ControlMode.Position, position / ELEVATORPERFOOT);
 	}
 
 	public void setEndEffector(double output) {
@@ -182,8 +188,17 @@ public class RobotOutput {
 	}
 
 	public void arcadeDrive(Joystick driveStick) {
+		
+		double x = driveStick.getX();
+		double y = driveStick.getY();
+		
+		if (elevator.getPosition() < SmartDashboard.getNumber("accelElevatorHeight", Robot.kElevator)) {
+			x = x / 2.0;
+			y = y / 2.0;
+		}
+		
 		double twitchy = SmartDashboard.getNumber("twitchy", Robot.kTwitchy);
-		light_drive.arcadeDrive(compDeadBand(driveStick.getY()), -compDeadBand(driveStick.getX()*twitchy), true);
+		light_drive.arcadeDrive(compDeadBand(y), -compDeadBand(x*twitchy), true);
 	}
 
 	public double compDeadBand(double input) {
