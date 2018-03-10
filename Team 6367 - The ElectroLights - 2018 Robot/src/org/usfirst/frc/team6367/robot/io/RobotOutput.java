@@ -107,6 +107,7 @@ public class RobotOutput {
 		elevatorMotor.config_kF(0, 0, 0);
 		elevatorMotor.configAllowableClosedloopError(0, (int) Math.round(.5 / kENCODERPERFOOT), 0);
 		elevatorMotor.configClosedloopRamp(0.5, 0);
+		elevatorMotor.getSensorCollection().setQuadraturePosition(0, 0);
 
 		driveRightFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		driveRightFront.config_kP(0, 0.8, 0);
