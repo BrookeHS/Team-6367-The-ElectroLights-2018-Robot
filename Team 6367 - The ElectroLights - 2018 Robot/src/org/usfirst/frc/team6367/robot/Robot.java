@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6367.robot;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
+import edu.wpi.first.wpilibj.CameraServer;
 import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
 import org.usfirst.frc.team6367.robot.auto.AutoTrajectory;
 import org.usfirst.frc.team6367.robot.auto.DriveStraight;
@@ -26,6 +27,7 @@ public class Robot extends MagicRobot {
 		AutoModeLeft,
 		AutoModeRight,
 		AutoModeMiddle,
+		AutoModeDefault,
 	}
 	
 	public SendableChooser<AutonomousChoice> startingPos;
@@ -54,6 +56,7 @@ public class Robot extends MagicRobot {
 		startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
 	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
 	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
+	    startingPos.addObject("Default", AutonomousChoice.AutoModeDefault);
 	    SmartDashboard.putData("Trajectory",startingPos);
 		
 	    SmartDashboard.putNumber("twitchy", kTwitchy);
@@ -78,6 +81,7 @@ public class Robot extends MagicRobot {
 	@Override
 	public void disabledInit() {
 		this.robotOut.stopAll();
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	// Code that runs when your robot is disabled.

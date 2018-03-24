@@ -38,9 +38,9 @@ public class TeleopControl {
 
 	public void teleopTasks() {
 		Joystick a = driverIn.getDriverStick();
-       	if(a.getTrigger()){
+       	if(a.getRawButton(2)){
     		endEffector.deployBox();
-       	} else if(a.getRawButton(2)){
+       	} else if(a.getTrigger()){
             endEffector.intake();
     	}else{
       		endEffector.stop();
@@ -56,14 +56,14 @@ public class TeleopControl {
        		elevator.upperMiddlePosition();
        	}
        	
-       	
        	if(a.getRawButton(7)) {
-       		elevator.latchArm();
-       	}  	
-       	else if(a.getRawButton(8)) {
-       		elevator.unlatchArm();
+       		elevator.setElevatorSpeed(0.2);
+       	}
+       	if(a.getRawButton(8)){
+       		elevator.setElevatorSpeed(0);
        	}
        	
+              	
        	if (!DriverStation.getInstance().isFMSAttached() && a.getRawButton(11)) {
        		robotOut.elevatorMotor.set(ControlMode.PercentOutput, a.getZ());
        	}

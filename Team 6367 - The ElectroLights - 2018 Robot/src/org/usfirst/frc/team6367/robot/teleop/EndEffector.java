@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6367.robot.teleop;
 
+import org.usfirst.frc.team6367.robot.io.DriverInput;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.io.SensorInput;
 
@@ -16,6 +17,9 @@ public class EndEffector implements MagicComponent {
 	RobotOutput robotOut;
 	@MagicInject
 	SensorInput sensors;
+	@MagicInject
+	DriverInput driverIn;
+	
 	
 	NetworkTableEntry accelLimit = SmartDashboard.getEntry("accelLimit");
 	
@@ -62,28 +66,30 @@ public class EndEffector implements MagicComponent {
 	public void execute() {
 		// if rotational acceleration is greater than N, force intake to happen
 		double accel = sensors.ahrs.getRawGyroZ();
-
+		double vel_robot = driverIn.getDriverStick().getY();
+		
 		SmartDashboard.putNumber("accel_x", sensors.ahrs.getRawGyroX());
 		SmartDashboard.putNumber("accel_y", sensors.ahrs.getRawGyroY());
 		SmartDashboard.putNumber("accel_z", sensors.ahrs.getRawGyroZ());
+		SmartDashboard.putNumber("vel_robot", driverIn.getDriverStick().getY());
 		
-		if (Math.abs(accel) > accelLimit.getDouble(kDefaultAccel)) {
+		if (Math.abs(accel) > accelLimit.getDouble(kDefaultAccel)  || vel_robot > 0.3) {
 			state = EffectorState.EINTAKE;
 		}
 		
 		switch (state) {
 		case DEPLOY:
 			//robotOut.setEndEffector(0.7);
-			robotOut.setEndEffector(-0.4);
+			robotOut.setEndEffector(-0.5);
 			count++;
 			break;
 		case INTAKE:
 			//robotOut.setEndEffector(-.7);
-			robotOut.setEndEffector(.5);
+			robotOut.setEndEffector(.55);
 			break;
 		case EINTAKE:
 			//robotOut.setEndEffector(-.7);
-			robotOut.setEndEffector(.5);
+			robotOut.setEndEffector(.55);
 			break;
 		case STOP:
 			robotOut.setEndEffector(0);

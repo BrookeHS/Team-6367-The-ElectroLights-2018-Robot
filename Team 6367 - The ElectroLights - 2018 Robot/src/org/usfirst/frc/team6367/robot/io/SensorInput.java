@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.SPI;
 public class SensorInput {
 
 	public AHRS ahrs;
-	public Limelight camera;
 	
 	// Constructor for SensorInput, creates an AHRS for the NavX-MXP.
 	public SensorInput() {
@@ -17,6 +16,5 @@ public class SensorInput {
 		} catch(RuntimeException e) {
 			DriverStation.reportError("Error instantiating navX MXP: "+e.getMessage(), true);
 		}
-		camera = new Limelight();
 	}
 }

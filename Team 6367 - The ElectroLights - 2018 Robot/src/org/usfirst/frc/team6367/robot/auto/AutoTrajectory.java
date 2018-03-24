@@ -7,6 +7,7 @@ import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
 import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.io.SensorInput;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.robotpy.magicbot.MagicInject;
@@ -42,11 +43,10 @@ public class AutoTrajectory {
 	 * Changes to implement: Read from CSV file for trajectory.
 	 */
 
+	
 	public void calculateTrajectory(AutonomousChoice startingLocation, String scaleSide) {
 		this.angle_error=0.0;
 		sensors.ahrs.reset();
-		
-		// Read trajectory information from file.
 		File myFile;
 		if (startingLocation == AutonomousChoice.AutoModeLeft && scaleSide.charAt(1) == 'R') {
 			myFile = new File("/home/lvuser/trajectories/robotLScaleR.csv");

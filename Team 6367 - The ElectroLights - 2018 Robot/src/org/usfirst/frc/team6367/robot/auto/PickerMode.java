@@ -52,7 +52,7 @@ public class PickerMode extends AutonomousStateMachine {
 		}
 	}
 	
-	@TimedState(duration=6.0, nextState="deployBox")
+	@TimedState(duration=5.0, nextState="deployBox")
 	public void liftElevator() {
 		elevator.upPosition();
 		if(elevator.upFinished()) {

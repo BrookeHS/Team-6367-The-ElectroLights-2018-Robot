@@ -152,7 +152,6 @@ public class RobotOutput {
 
 	public void setDriveLeft(double output) {
 		this.driveLeftFront.set(ControlMode.PercentOutput, -output);
-		// this.driveLeftRear.set(ControlMode.PercentOutput,-output);
 	}
 
 	public boolean atPosition() {
