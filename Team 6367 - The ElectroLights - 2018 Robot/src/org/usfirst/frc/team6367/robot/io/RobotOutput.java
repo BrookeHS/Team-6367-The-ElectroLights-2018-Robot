@@ -191,7 +191,7 @@ public class RobotOutput {
 
 	public void arcadeDrive(Joystick driveStick) {
 		
-		double x = driveStick.getTwist();
+		double x = driveStick.getX();
 		double y = driveStick.getY();
 		
 		if (elevator.getPosition() < SmartDashboard.getNumber("accelElevatorHeight", Robot.kElevator)) {
