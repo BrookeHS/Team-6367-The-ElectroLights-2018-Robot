@@ -155,7 +155,12 @@ public class AutoTrajectory {
         		rSegment.velocity,
         		
         		ang,
-        		desired_heading
+        		desired_heading,
+        		
+        		lSegment.x,
+        		lSegment.y,
+        		rSegment.x,
+        		rSegment.y,
         });
        	
        	
