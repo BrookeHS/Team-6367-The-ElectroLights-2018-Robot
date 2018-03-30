@@ -8,11 +8,13 @@ import org.usfirst.frc.team6367.robot.io.RobotOutput;
 import org.usfirst.frc.team6367.robot.io.SensorInput;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import io.github.robotpy.magicbot.MagicInject;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.Trajectory.Segment;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
@@ -90,8 +92,14 @@ public class AutoTrajectory {
 	public void move() {
 		// Figure out how fast the left side moves and figure out how fast the right
 		// side moves.
-		double outputLeftEncoder = left.calculate(robotOut.getEncoderLeftSide()); 
-		double outputRightEncoder = right.calculate(robotOut.getEncoderRightSide());
+		int l_encoder = robotOut.getEncoderLeftSide();
+		int r_encoder = robotOut.getEncoderRightSide();
+		
+		Segment lSegment = left.getSegment();
+		Segment rSegment = right.getSegment();
+		
+		double outputLeftEncoder = left.calculate(l_encoder); 
+		double outputRightEncoder = right.calculate(r_encoder);
 		// Calculates the difference between our current angle and the desired angle.
 		double ang = -sensors.ahrs.getAngle(); // Assuming the gyro is giving a value in degrees
 		double desired_heading = Pathfinder.r2d(left.getHeading()); // Should also be in degrees
@@ -109,6 +117,32 @@ public class AutoTrajectory {
        	SmartDashboard.putNumber("outputLeftEncoder", outputLeftEncoder);
        	SmartDashboard.putNumber("outputRightEncoder", outputRightEncoder);
        	SmartDashboard.putNumber("turn", turn);
+       	
+       	double l_distance_covered = ((double)(l_encoder - 0) / kEncodersTicksPerRev)
+                * Math.PI * kWheelDiameter;
+       	double r_distance_covered = ((double)(r_encoder - 0) / kEncodersTicksPerRev)
+                * Math.PI * kWheelDiameter;
+       	
+        SmartDashboard.putNumberArray("pfdebug", new double[] {
+        		Timer.getFPGATimestamp(),
+        		
+        		outputLeftEncoder,
+        		l_encoder,
+        		l_distance_covered,
+        		lSegment.position,
+        		lSegment.velocity,
+        		
+        		outputRightEncoder,
+        		r_encoder,
+        		r_distance_covered,
+        		rSegment.position,
+        		rSegment.velocity,
+        		
+        		ang,
+        		desired_heading
+        });
+       	
+       	
        	SmartDashboard.updateValues();
        	LiveWindow.updateValues();
 
