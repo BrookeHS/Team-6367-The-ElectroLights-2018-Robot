@@ -1,6 +1,8 @@
 package org.usfirst.frc.team6367.robot;
 
 import org.usfirst.frc.team6367.robot.LightDrive.LightDrive;
+
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import org.usfirst.frc.team6367.robot.Robot.AutonomousChoice;
 import org.usfirst.frc.team6367.robot.auto.AutoTrajectory;
@@ -39,6 +41,8 @@ public class Robot extends MagicRobot {
 	public SensorInput sensors;
 	public TeleopControl teleopControl;
 	public AutoTrajectory autoTrajectory;
+	public CameraServer server;
+	public UsbCamera camera;
 	
 	private static final String kDriveStraight = "Drive Straight";
 	private static final String kPicker = "Picker";
@@ -75,13 +79,15 @@ public class Robot extends MagicRobot {
 		
 		addComponent(this.endEffector);
 		addComponent(this.elevator);
+		server = CameraServer.getInstance();		
+		camera = server.startAutomaticCapture();
+		camera.setFPS(30);
 	}
-
+	
 	// Initialization of code for the Disabled portion of the match.
 	@Override
 	public void disabledInit() {
 		this.robotOut.stopAll();
-		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	// Code that runs when your robot is disabled.

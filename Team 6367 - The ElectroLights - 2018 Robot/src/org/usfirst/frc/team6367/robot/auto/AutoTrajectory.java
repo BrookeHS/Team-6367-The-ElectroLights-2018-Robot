@@ -69,8 +69,8 @@ public class AutoTrajectory {
 		Trajectory trajectory = Pathfinder.readFromCSV(myFile);
 
 		// Modifies trajectory based on how wide the wheels are.
-		// Wheelbase Width = 0.5969
-		TankModifier modifier = new TankModifier(trajectory).modify(0.5969);
+		// Wheelbase Width = 0.6048375
+		TankModifier modifier = new TankModifier(trajectory).modify(0.6048375);
 
 		// Creates two EncoderFollower objects for the left and the right side of the
 		// robot.
