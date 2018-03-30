@@ -48,21 +48,39 @@ public class PickerMode extends AutonomousStateMachine {
 		autoTrajectory.move();
 		if (autoTrajectory.isFinished()) {
 			robotOut.stopDriving();
-			nextState("liftElevator");
+			if(choiceNum.isSwitch()==true) {
+				nextState("liftElevatorSwitch");
+			}
+			else {
+				nextState("liftElevatorScale");
+			}
 		}
 	}
 	
+	
 	@TimedState(duration=5.0, nextState="deployBox")
-	public void liftElevator() {
+	public void liftElevatorScale() {
 		elevator.upPosition();
-		if(elevator.upFinished()) {
+		if(elevator.posFinished()) {
 			nextState("deployBox");
 		}
 	}
-
+	@TimedState(duration=3.0, nextState="driveForward")
+	public void liftElevatorSwitch() {
+		elevator.midPosition();
+		if(elevator.posFinished()) {
+			nextState("driveForward");
+		}
+	}
+	@TimedState(duration=1.5,nextState="deployBox")
+	public void driveForward() {
+		robotOut.setDriveLeft(0.75);
+		robotOut.setDriveRight(.75);	
+	}
 	@State
 	public void deployBox() {
 		endEffector.deployBox();
+		robotOut.stopDriving();
        	SmartDashboard.putNumber("shooter", endEffector.returnCount());
        	SmartDashboard.updateValues();
        	LiveWindow.updateValues();

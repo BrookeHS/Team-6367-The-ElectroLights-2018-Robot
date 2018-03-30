@@ -26,10 +26,19 @@ import io.github.robotpy.magicbot.MagicRobot;
 public class Robot extends MagicRobot {
 	
 	public enum AutonomousChoice {
-		AutoModeLeft,
-		AutoModeRight,
-		AutoModeMiddle,
-		AutoModeDefault,
+		AutoModeLeftScale,
+		AutoModeRightScale,
+		AutoModeMiddleScale,
+		AutoModeLeftSwitch,
+		AutoModeRightSwitch,
+		AutoModeMiddleSwitch,
+		AutoModeDefault;
+		
+		public boolean isSwitch() {
+			return this == AutoModeLeftSwitch ||
+				   this == AutoModeRightSwitch ||
+				   this == AutoModeMiddleSwitch;
+		}
 	}
 	
 	public SendableChooser<AutonomousChoice> startingPos;
@@ -57,9 +66,12 @@ public class Robot extends MagicRobot {
 	public void createObjects() {
 		
 		startingPos = new SendableChooser<AutonomousChoice>();
-		startingPos.addObject("Left", AutonomousChoice.AutoModeLeft);
-	    startingPos.addObject("Right", AutonomousChoice.AutoModeRight);
-	    startingPos.addObject("Middle", AutonomousChoice.AutoModeMiddle);
+		startingPos.addObject("LeftScale", AutonomousChoice.AutoModeLeftScale);
+	    startingPos.addObject("RightScale", AutonomousChoice.AutoModeRightScale);
+	    startingPos.addObject("MiddleScale", AutonomousChoice.AutoModeMiddleScale);
+	    startingPos.addObject("LeftSwitch", AutonomousChoice.AutoModeLeftSwitch);
+	    startingPos.addObject("RightSwitch", AutonomousChoice.AutoModeRightSwitch);
+	    startingPos.addObject("MiddleSwitch", AutonomousChoice.AutoModeMiddleSwitch);
 	    startingPos.addObject("Default", AutonomousChoice.AutoModeDefault);
 	    SmartDashboard.putData("Trajectory",startingPos);
 		
