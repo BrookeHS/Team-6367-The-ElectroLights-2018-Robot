@@ -50,19 +50,35 @@ public class AutoTrajectory {
 		this.angle_error=0.0;
 		sensors.ahrs.reset();
 		File myFile;
-		if (startingLocation == AutonomousChoice.AutoModeLeft && scaleSide.charAt(1) == 'R') {
+		if (startingLocation == AutonomousChoice.AutoModeLeftScale && scaleSide.charAt(1) == 'R') {
 			myFile = new File("/home/lvuser/trajectories/robotLScaleR.csv");
-		} else if (startingLocation == AutonomousChoice.AutoModeLeft && scaleSide.charAt(1) == 'L') {
+		} else if (startingLocation == AutonomousChoice.AutoModeLeftScale && scaleSide.charAt(1) == 'L') {
 			myFile = new File("/home/lvuser/trajectories/robotLScaleL.csv");
-		} else if (startingLocation == AutonomousChoice.AutoModeMiddle && scaleSide.charAt(1) == 'R') {
+		} else if (startingLocation == AutonomousChoice.AutoModeMiddleScale && scaleSide.charAt(1) == 'R') {
 			myFile = new File("/home/lvuser/trajectories/robotMScaleR.csv");
-		} else if (startingLocation == AutonomousChoice.AutoModeMiddle && scaleSide.charAt(1) == 'L') {
+		} else if (startingLocation == AutonomousChoice.AutoModeMiddleScale && scaleSide.charAt(1) == 'L') {
 			myFile = new File("/home/lvuser/trajectories/robotMScaleL.csv");
-		} else if (startingLocation == AutonomousChoice.AutoModeRight && scaleSide.charAt(1) == 'R') {
+		} else if (startingLocation == AutonomousChoice.AutoModeRightScale && scaleSide.charAt(1) == 'R') {
 			myFile = new File("/home/lvuser/trajectories/robotRScaleR.csv");
-		} else if (startingLocation == AutonomousChoice.AutoModeRight && scaleSide.charAt(1) == 'L') {
+		} else if (startingLocation == AutonomousChoice.AutoModeRightScale && scaleSide.charAt(1) == 'L') {
 			myFile = new File("/home/lvuser/trajectories/robotRScaleL.csv");
-		} else {
+		}
+		
+		else if (startingLocation == AutonomousChoice.AutoModeLeftSwitch && scaleSide.charAt(0) == 'R') {
+			myFile = new File("/home/lvuser/trajectories/robotLSwitchR.csv");
+		} else if (startingLocation == AutonomousChoice.AutoModeLeftSwitch && scaleSide.charAt(0) == 'L') {
+			myFile = new File("/home/lvuser/trajectories/robotLSwitchL.csv");
+		} else if (startingLocation == AutonomousChoice.AutoModeMiddleSwitch && scaleSide.charAt(0) == 'R') {
+			myFile = new File("/home/lvuser/trajectories/robotMSwitchR.csv");
+		} else if (startingLocation == AutonomousChoice.AutoModeMiddleSwitch && scaleSide.charAt(0) == 'L') {
+			myFile = new File("/home/lvuser/trajectories/robotMSwitchL.csv");
+		} else if (startingLocation == AutonomousChoice.AutoModeRightSwitch && scaleSide.charAt(0) == 'R') {
+			myFile = new File("/home/lvuser/trajectories/robotRSwitchR.csv");
+		} else if (startingLocation == AutonomousChoice.AutoModeRightSwitch && scaleSide.charAt(0) == 'L') {
+			myFile = new File("/home/lvuser/trajectories/robotRSwitchL.csv");
+		}
+		
+		else {
 			myFile = new File("/home/lvuser/trajectories/default.csv");
 		}
 		

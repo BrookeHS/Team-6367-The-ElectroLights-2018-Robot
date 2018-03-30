@@ -4,6 +4,7 @@ import org.usfirst.frc.team6367.robot.io.RobotOutput;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +20,8 @@ public class Elevator implements MagicComponent {
 	
 	@MagicInject
 	RobotOutput robotOut;
+	
+	PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
 	public final static double  kswitch = 1.25;
 	public final static double  kscale  = 6.1;
@@ -49,7 +52,7 @@ public class Elevator implements MagicComponent {
 		return robotOut.elevatorMotor.getSensorCollection().getQuadraturePosition() / 1024.0;
 	}
 	
-	public boolean upFinished() {
+	public boolean posFinished() {
 		return Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) <= 300
 				&& Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) >= 70;
 	}
@@ -84,6 +87,7 @@ public class Elevator implements MagicComponent {
 			robotOut.dropServo.set(0.0);
 			break;
 		}
-		
+		SmartDashboard.putNumber("Elevator Current",robotOut.elevatorMotor.getOutputCurrent());
+		SmartDashboard.putNumber("Elevator PDP", pdp.getCurrent(3));
 	}
 }
