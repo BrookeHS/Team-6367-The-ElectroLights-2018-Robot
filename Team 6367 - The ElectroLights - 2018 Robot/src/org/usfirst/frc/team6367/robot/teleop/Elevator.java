@@ -31,13 +31,14 @@ public class Elevator implements MagicComponent {
 	Timer latchTimer = new Timer();
 	
 	public void upPosition() {
-		robotOut.elevatorMotor.set(ControlMode.Position, -20.4*(1024));
+		//robotOut.elevatorMotor.set(ControlMode.Position, -20.4*(1024));
+		robotOut.elevatorMotor.set(ControlMode.MotionMagic, 20.65*(1024));
 	}
 	public void downPosition() {
-		robotOut.elevatorMotor.set(ControlMode.Position, 0);
+		robotOut.elevatorMotor.set(ControlMode.MotionMagic, 0);
 	}
 	public void midPosition() {
-		robotOut.elevatorMotor.set(ControlMode.Position, -7*(1024));		
+		robotOut.elevatorMotor.set(ControlMode.MotionMagic, 7*(1024));		
 	}
 	
 	public void setElevatorSpeed(double speed) {
@@ -45,7 +46,7 @@ public class Elevator implements MagicComponent {
 	}
 	
 	public void upperMiddlePosition() {
-		robotOut.elevatorMotor.set(ControlMode.Position, -8.5*(1024));
+		robotOut.elevatorMotor.set(ControlMode.MotionMagic, 8.5*(1024));
 	}
 	
 	public double getPosition() {
@@ -53,8 +54,8 @@ public class Elevator implements MagicComponent {
 	}
 	
 	public boolean posFinished() {
-		return Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) <= 300
-				&& Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) >= 70;
+		return Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) <= 300;
+				//&& Math.abs(robotOut.elevatorMotor.getClosedLoopError(0)) >= 70;
 	}
 	
 	public void unlatchArm() {

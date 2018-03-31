@@ -6,6 +6,7 @@ import org.usfirst.frc.team6367.robot.teleop.Elevator;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -107,10 +108,29 @@ public class RobotOutput {
 		elevatorMotor.config_kP(0, 0.6, 0);
 		elevatorMotor.config_kI(0, 0, 0);
 		elevatorMotor.config_kD(0, 0.1, 0);
-		elevatorMotor.config_kF(0, 0, 0);
+		elevatorMotor.config_kF(0, 1.46, 0);
 		elevatorMotor.configAllowableClosedloopError(0, (int) Math.round(.5 / kENCODERPERFOOT), 0);
-		elevatorMotor.configClosedloopRamp(0.5, 0);
+		elevatorMotor.configClosedloopRamp(0, 0);
 		elevatorMotor.getSensorCollection().setQuadraturePosition(0, 0);
+		
+		elevatorMotor.setSensorPhase(false);
+		elevatorMotor.setInverted(true);
+
+		/* Set relevant frame periods to be at least as fast as periodic rate */
+		elevatorMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, 0);
+		elevatorMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, 0);
+
+		/* set the peak and nominal outputs */
+		elevatorMotor.configNominalOutputForward(0, 0);
+		elevatorMotor.configNominalOutputReverse(0, 0);
+		elevatorMotor.configPeakOutputForward(1, 0);
+		elevatorMotor.configPeakOutputReverse(-1, 0);
+		
+		elevatorMotor.configMotionCruiseVelocity(1000, 0);
+		elevatorMotor.configMotionAcceleration(700, 0);
+		
+		elevatorMotor.configForwardSoftLimitEnable(false, 0);
+		elevatorMotor.configReverseSoftLimitEnable(true, 0);
 
 		driveRightFront.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		driveRightFront.config_kP(0, 0.8, 0);
