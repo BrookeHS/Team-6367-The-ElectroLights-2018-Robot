@@ -49,7 +49,7 @@ public class RobotOutput {
 
 	protected DifferentialDrive light_drive;
 	protected MecanumDrive light_drive2;
-	public static final double DEADBAND = .3;
+	public static final double DEADBAND = .15;
 	public static final double kENCODERPERFOOT = (6 * Math.PI) / 1024;
 
 	public static final int CLOSEENOUGH = (int) Math.round(.5 / kENCODERPERFOOT);

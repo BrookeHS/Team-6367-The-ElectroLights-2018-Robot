@@ -8,7 +8,7 @@ import jaci.pathfinder.Waypoint;
 
 public class PathGenerator {
 	
-	public static final double kMaxVelocity = 2.0;
+	public static final double kMaxVelocity = 1.7;
 
 	public static void main(String[] args) {
 		PathfinderLoader.load();
@@ -70,15 +70,13 @@ public class PathGenerator {
 				);
 		
 		generateAndWrite("robotMSwitchL",
-				new Waypoint(0.502919983906561,3.6575998829568,0),
-				new Waypoint(1.8287999414784,6.70559978542081,1.3089975),
-				new Waypoint(2.4383999219712,7.01039977566721,0),
-				new Waypoint(3.3527998927104,6.85799978054401,-0.872665)
+				new Waypoint(0.50291998390656,3.6575998829568,0),
+				new Waypoint(2.1335999317248,5.48639982443521,0)
 				);
 		
 		generateAndWrite("robotMSwitchR",
-				new Waypoint(0.502919983906561,3.6575998829568,0),
-				new Waypoint(2.1335999317248,2.7431999122176,0)
+				new Waypoint(0.50291998390656,3.6575998829568,0),
+				new Waypoint(2.1335999317248,2.5907999170944,0)
 		);
 
 		generateAndWrite("robotRSwitchL",

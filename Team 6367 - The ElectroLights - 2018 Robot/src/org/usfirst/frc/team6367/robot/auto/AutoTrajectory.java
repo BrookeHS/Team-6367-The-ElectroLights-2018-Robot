@@ -29,7 +29,7 @@ public class AutoTrajectory {
 	public static final double gp = 0.02;
 	public static final double gd = 0.0025;
 	public static final double dt = 0.02;
-	
+
 	double angle_error = 0.0;
 
 	@MagicInject
@@ -45,9 +45,8 @@ public class AutoTrajectory {
 	 * Changes to implement: Read from CSV file for trajectory.
 	 */
 
-	
 	public void calculateTrajectory(AutonomousChoice startingLocation, String scaleSide) {
-		this.angle_error=0.0;
+		this.angle_error = 0.0;
 		sensors.ahrs.reset();
 		File myFile;
 		if (startingLocation == AutonomousChoice.AutoModeLeftScale && scaleSide.charAt(1) == 'R') {
@@ -63,7 +62,7 @@ public class AutoTrajectory {
 		} else if (startingLocation == AutonomousChoice.AutoModeRightScale && scaleSide.charAt(1) == 'L') {
 			myFile = new File("/home/lvuser/trajectories/robotRScaleL.csv");
 		}
-		
+
 		else if (startingLocation == AutonomousChoice.AutoModeLeftSwitch && scaleSide.charAt(0) == 'R') {
 			myFile = new File("/home/lvuser/trajectories/robotLSwitchR.csv");
 		} else if (startingLocation == AutonomousChoice.AutoModeLeftSwitch && scaleSide.charAt(0) == 'L') {
@@ -77,13 +76,13 @@ public class AutoTrajectory {
 		} else if (startingLocation == AutonomousChoice.AutoModeRightSwitch && scaleSide.charAt(0) == 'L') {
 			myFile = new File("/home/lvuser/trajectories/robotRSwitchL.csv");
 		}
-		
+
 		else {
 			myFile = new File("/home/lvuser/trajectories/default.csv");
 		}
-		
+
 		System.out.println("Using trajectory " + myFile.getAbsolutePath());
-		
+
 		Trajectory trajectory = Pathfinder.readFromCSV(myFile);
 
 		// Modifies trajectory based on how wide the wheels are.
@@ -110,11 +109,11 @@ public class AutoTrajectory {
 		// side moves.
 		int l_encoder = robotOut.getEncoderLeftSide();
 		int r_encoder = robotOut.getEncoderRightSide();
-		
+
 		Segment lSegment = left.getSegment();
 		Segment rSegment = right.getSegment();
-		
-		double outputLeftEncoder = left.calculate(l_encoder); 
+
+		double outputLeftEncoder = left.calculate(l_encoder);
 		double outputRightEncoder = right.calculate(r_encoder);
 		// Calculates the difference between our current angle and the desired angle.
 		double ang = -sensors.ahrs.getAngle(); // Assuming the gyro is giving a value in degrees
@@ -123,49 +122,31 @@ public class AutoTrajectory {
 
 		// Interpolate the angleDifference (-180 to 180) to a range between (-1 and 1)
 		// Multiply that again by a factor of 0.8 to slow it down a bit.
-	//	double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
-		double turn = AutoTrajectory.gp * angleDifference + 
-				(AutoTrajectory.gd *((angleDifference-this.angle_error)
-						/AutoTrajectory.dt));
+		// double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
+		double turn = AutoTrajectory.gp * angleDifference
+				+ (AutoTrajectory.gd * ((angleDifference - this.angle_error) / AutoTrajectory.dt));
 		angle_error = angleDifference;
 		robotOut.setDriveLeft(outputLeftEncoder - turn);
-		robotOut.setDriveRight(outputRightEncoder +turn);
-       	SmartDashboard.putNumber("outputLeftEncoder", outputLeftEncoder);
-       	SmartDashboard.putNumber("outputRightEncoder", outputRightEncoder);
-       	SmartDashboard.putNumber("turn", turn);
-       	
-       	double l_distance_covered = ((double)(l_encoder - 0) / kEncodersTicksPerRev)
-                * Math.PI * kWheelDiameter;
-       	double r_distance_covered = ((double)(r_encoder - 0) / kEncodersTicksPerRev)
-                * Math.PI * kWheelDiameter;
-       	
-        SmartDashboard.putNumberArray("pfdebug", new double[] {
-        		Timer.getFPGATimestamp(),
-        		
-        		outputLeftEncoder,
-        		l_encoder,
-        		l_distance_covered,
-        		lSegment.position,
-        		lSegment.velocity,
-        		
-        		outputRightEncoder,
-        		r_encoder,
-        		r_distance_covered,
-        		rSegment.position,
-        		rSegment.velocity,
-        		
-        		ang,
-        		desired_heading,
-        		
-        		lSegment.x,
-        		lSegment.y,
-        		rSegment.x,
-        		rSegment.y,
-        });
-       	
-       	
-       	SmartDashboard.updateValues();
-       	LiveWindow.updateValues();
+		robotOut.setDriveRight(outputRightEncoder + turn);
+		SmartDashboard.putNumber("outputLeftEncoder", outputLeftEncoder);
+		SmartDashboard.putNumber("outputRightEncoder", outputRightEncoder);
+		SmartDashboard.putNumber("turn", turn);
+
+		double l_distance_covered = ((double) (l_encoder - 0) / kEncodersTicksPerRev) * Math.PI * kWheelDiameter;
+		double r_distance_covered = ((double) (r_encoder - 0) / kEncodersTicksPerRev) * Math.PI * kWheelDiameter;
+
+		SmartDashboard.putNumberArray("pfdebug", new double[] { Timer.getFPGATimestamp(),
+
+				outputLeftEncoder, l_encoder, l_distance_covered, lSegment.position, lSegment.velocity,
+
+				outputRightEncoder, r_encoder, r_distance_covered, rSegment.position, rSegment.velocity,
+
+				ang, desired_heading,
+
+				lSegment.x, lSegment.y, rSegment.x, rSegment.y, });
+
+		SmartDashboard.updateValues();
+		LiveWindow.updateValues();
 
 	}
 

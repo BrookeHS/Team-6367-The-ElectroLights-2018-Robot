@@ -58,27 +58,16 @@ public class PickerMode extends AutonomousStateMachine {
 	}
 	
 	
-	@TimedState(duration=5.0, nextState="deployBox")
-	public void liftElevatorScale() {
+	@TimedState(duration=5.0, nextState="deployScale")
+	public void liftElevatorScale(double tm) {
 		elevator.upPosition();
-		if(elevator.posFinished()) {
-			nextState("deployBox");
+		if(tm > 1 && elevator.posFinished()) {
+			nextState("deployScale");
 		}
 	}
-	@TimedState(duration=3.0, nextState="driveForward")
-	public void liftElevatorSwitch() {
-		elevator.midPosition();
-		if(elevator.posFinished()) {
-			nextState("driveForward");
-		}
-	}
-	@TimedState(duration=1.5,nextState="deployBox")
-	public void driveForward() {
-		robotOut.setDriveLeft(0.75);
-		robotOut.setDriveRight(.75);	
-	}
+	
 	@State
-	public void deployBox() {
+	public void deployScale() {
 		endEffector.deployBox();
 		robotOut.stopDriving();
        	SmartDashboard.putNumber("shooter", endEffector.returnCount());
@@ -89,6 +78,42 @@ public class PickerMode extends AutonomousStateMachine {
 			elevator.downPosition();
 			this.done();
 		}
+	}
+	
+	@TimedState(duration=3.0, nextState="driveForward")
+	public void liftElevatorSwitch(double tm) {
+		elevator.midPosition();
+		if(tm > 1 && elevator.posFinished()) {
+			nextState("driveForward");
+		}
+	}
+	
+	@TimedState(duration=1.5,nextState="deploySwitch")
+	public void driveForward() {
+		robotOut.setDriveLeft(0.55);
+		robotOut.setDriveRight(0.55);	
+	}
+	
+	@State
+	public void deploySwitch() {
+		endEffector.deployBox();
+		robotOut.stopDriving();
+       	if(endEffector.finishedDeploy()) {
+			endEffector.stop();
+			nextState("backup");
+		}
+	}
+	
+	@TimedState(duration=1.5, nextState="stopState")
+	public void backup() {
+		robotOut.setDriveLeft(-0.5);
+		robotOut.setDriveRight(-0.5);	
+	}
+	
+	@State
+	public void stopState() {
+		robotOut.stopDriving();
+		done();
 	}
 }
 

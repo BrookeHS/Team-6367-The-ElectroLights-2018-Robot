@@ -21,7 +21,7 @@ public class Elevator implements MagicComponent {
 	@MagicInject
 	RobotOutput robotOut;
 	
-	PowerDistributionPanel pdp = new PowerDistributionPanel();
+	//PowerDistributionPanel pdp = new PowerDistributionPanel();
 	
 	public final static double  kswitch = 1.25;
 	public final static double  kscale  = 6.1;
@@ -87,7 +87,7 @@ public class Elevator implements MagicComponent {
 			robotOut.dropServo.set(0.0);
 			break;
 		}
-		SmartDashboard.putNumber("Elevator Current",robotOut.elevatorMotor.getOutputCurrent());
-		SmartDashboard.putNumber("Elevator PDP", pdp.getCurrent(3));
+		//SmartDashboard.putNumber("Elevator Current",robotOut.elevatorMotor.getOutputCurrent());
+		//SmartDashboard.putNumber("Elevator PDP", pdp.getCurrent(3));
 	}
 }
