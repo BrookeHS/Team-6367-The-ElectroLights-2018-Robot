@@ -33,13 +33,14 @@ public class PickerMode extends AutonomousStateMachine {
 
 	int startingLocation;
 	boolean scaleSide;
+	String gameData;
 
 	// This method is called once at the beginning of autonomous mode.
 	@Override
 	public void onEnabled() {
 		super.onEnabled();
 		choiceNum = startingPos.getSelected();
-		String gameData = DriverStation.getInstance().getGameSpecificMessage();
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		autoTrajectory.calculateTrajectory(choiceNum, gameData);
 	}
 	
