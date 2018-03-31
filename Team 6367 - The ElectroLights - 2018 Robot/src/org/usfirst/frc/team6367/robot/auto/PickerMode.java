@@ -53,7 +53,12 @@ public class PickerMode extends AutonomousStateMachine {
 				nextState("liftElevatorSwitch");
 			}
 			else {
-				nextState("liftElevatorScale");
+				 // TODO: temporary fix
+				if (gameData.charAt(1) == 'R') {
+					done();
+				} else {
+					nextState("liftElevatorScale");
+				}
 			}
 		}
 	}
