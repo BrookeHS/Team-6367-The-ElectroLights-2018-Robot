@@ -109,11 +109,17 @@ class MyRobot(wpilib.TimedRobot):
     def autonomousPeriodic(self):
         l_encoder = self.l_encoder.get()
         r_encoder = self.r_encoder.get()
+        
+        try:
+            lSegment = self.leftFollower.getSegment()
+            rSegment = self.rightFollower.getSegment()
+        except IndexError:
+            # end of trajectory
+            self.robot_drive.tankDrive(0, 0)
+            return
+        
         l = self.leftFollower.calculate(l_encoder)
         r = self.rightFollower.calculate(r_encoder)
-        
-        lSegment = self.leftFollower.getSegment()
-        rSegment = self.rightFollower.getSegment()
         
         l_distance_covered = ((l_encoder - 0) / self.ENCODER_COUNTS_PER_REV) * math.pi * self.WHEEL_DIAMETER;
         r_distance_covered = ((r_encoder - 0) / self.ENCODER_COUNTS_PER_REV) * math.pi * self.WHEEL_DIAMETER;
