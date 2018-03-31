@@ -29,6 +29,7 @@ public class EndEffector implements MagicComponent {
 		DEPLOY,
 		INTAKE,
 		EINTAKE,
+		SDEPLOY,
 		STOP
 	}
 	
@@ -40,6 +41,10 @@ public class EndEffector implements MagicComponent {
 	
 	public void deployBox() {
 		state = EffectorState.DEPLOY;
+	}
+	
+	public void slowDeploy() {
+		state = EffectorState.SDEPLOY;
 	}
 	
 	public double returnCount() {
@@ -81,6 +86,11 @@ public class EndEffector implements MagicComponent {
 		case DEPLOY:
 			//robotOut.setEndEffector(0.7);
 			robotOut.setEndEffector(-0.5);
+			count++;
+			break;
+		case SDEPLOY:
+			//robotOut.setEndEffector(0.7);
+			robotOut.setEndEffector(-0.4);
 			count++;
 			break;
 		case INTAKE:
