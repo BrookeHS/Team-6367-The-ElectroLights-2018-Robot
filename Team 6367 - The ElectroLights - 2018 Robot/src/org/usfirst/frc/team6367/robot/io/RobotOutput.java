@@ -105,10 +105,10 @@ public class RobotOutput {
 		
 		
 		elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		elevatorMotor.config_kP(0, 0.6, 0);
+		elevatorMotor.config_kP(0, 1, 0);
 		elevatorMotor.config_kI(0, 0, 0);
-		elevatorMotor.config_kD(0, 0.1, 0);
-		elevatorMotor.config_kF(0, 1.46, 0);
+		elevatorMotor.config_kD(0, 5, 0);
+		elevatorMotor.config_kF(0, 0.1142, 0);
 		elevatorMotor.configAllowableClosedloopError(0, (int) Math.round(.5 / kENCODERPERFOOT), 0);
 		elevatorMotor.configClosedloopRamp(0, 0);
 		elevatorMotor.getSensorCollection().setQuadraturePosition(0, 0);
@@ -126,8 +126,8 @@ public class RobotOutput {
 		elevatorMotor.configPeakOutputForward(1, 0);
 		elevatorMotor.configPeakOutputReverse(-1, 0);
 		
-		elevatorMotor.configMotionCruiseVelocity(1000, 0);
-		elevatorMotor.configMotionAcceleration(700, 0);
+		elevatorMotor.configMotionCruiseVelocity(720, 0);
+		elevatorMotor.configMotionAcceleration(1440, 0);
 		
 		elevatorMotor.configForwardSoftLimitEnable(false, 0);
 		elevatorMotor.configReverseSoftLimitEnable(true, 0);

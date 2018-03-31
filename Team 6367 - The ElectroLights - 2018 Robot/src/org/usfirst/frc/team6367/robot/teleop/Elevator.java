@@ -32,7 +32,7 @@ public class Elevator implements MagicComponent {
 	
 	public void upPosition() {
 		//robotOut.elevatorMotor.set(ControlMode.Position, -20.4*(1024));
-		robotOut.elevatorMotor.set(ControlMode.MotionMagic, 20.65*(1024));
+		robotOut.elevatorMotor.set(ControlMode.MotionMagic, 20.7*(1024));
 	}
 	public void downPosition() {
 		robotOut.elevatorMotor.set(ControlMode.MotionMagic, 0);
