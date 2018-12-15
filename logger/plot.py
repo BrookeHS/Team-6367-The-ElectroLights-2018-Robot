@@ -12,7 +12,8 @@ import pathfinder as pf
 import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
-    with open(sys.argv[1]) as fp:
+    fname = sys.argv[1]
+    with open(fname) as fp:
         data = json.load(fp)
     
     # fix time
@@ -20,6 +21,7 @@ if __name__ == '__main__':
     
     for d in data:
         d[0] -= offset
+        #
         d.append(pf.boundHalfDegrees(d[12] - d[11]))
     
     data = np.array(data)
@@ -49,16 +51,19 @@ if __name__ == '__main__':
     # 15
     # 16
     
-    plt.subplot2grid((3,1),(0,0))
+    plt.suptitle(fname)
+    
+    plt.subplot2grid((3,1),(1,0))
     plt.plot(data[0], data[4] - data[3], data[0], data[9] - data[8])
     plt.title("Encoder error")
     
-    plt.subplot2grid((3,1),(1,0))
+    plt.subplot2grid((3,1),(2,0))
     plt.plot(data[0], data[-1])
     plt.title("Gyro error")
     
-    plt.subplot2grid((3,1),(2,0))
-    plt.plot(-data[14], data[13], -data[16], data[15])
-    plt.title("Trajectory")
+    plt.subplot2grid((3,1),(0,0))
+    #plt.plot(-data[14], data[13], -data[16], data[15])
+    plt.plot(data[0], data[1], data[0], data[6])
+    plt.title("Output")
     
     plt.show()
