@@ -26,30 +26,30 @@ class TeleopControl :
 
 	def teleopTasks(self):
 		Joystick a = driverIn.getDriverStick()
-		if a.getRawButton(2):
-			endEffector.deployBox()
-		elif a.getTrigger():
-			endEffector.intake()
-		else:
-			endEffector.stop()
-		if a.getRawButton(5):
-			elevator.upPosition()
-		elif a.getRawButton(3):
-			elevator.midPosition()
-		elif a.getRawButton(3):
-			elevator.midPosition()
-		elif a.getRawButton(4):
-			elevator.downPosition()
-		elif a.getRawButton(6):
-			elevator.upperMiddlePosition()
-		if a.getRawButton(7):
-			elevator.setElevatorSpeed(0.2)
-		if a.getRawButton(8):
-			elevator.setElevatorSpeed(0)
-		
+			if a.getRawButton(2):
+				endEffector.deployBox()
+			elif a.getTrigger():
+				endEffector.intake()
+			else:
+				endEffector.stop()
+			if a.getRawButton(5):
+				elevator.upPosition()
+			elif a.getRawButton(3):
+				elevator.midPosition()
+			elif a.getRawButton(3):
+				elevator.midPosition()
+			elif a.getRawButton(4):
+				elevator.downPosition()
+			elif a.getRawButton(6):
+				elevator.upperMiddlePosition()
+			if a.getRawButton(7):
+				elevator.setElevatorSpeed(0.2)
+			if a.getRawButton(8):
+				elevator.setElevatorSpeed(0)
+			
 
-		if not DriverStation.getInstance().isFMSAttached() and a.getRawButton(11):
-			robotOut.elevatorMotor.set(ControlMode.PercentOutput, a.getZ())
+			if not DriverStation.getInstance().isFMSAttached() and a.getRawButton(11):
+				robotOut.elevatorMotor.set(ControlMode.PercentOutput, a.getZ())
 		
 		robotOut.arcadeDrive(a)
 
